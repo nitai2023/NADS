@@ -15,7 +15,7 @@ let label = ref("");
         class="demo-ruleForm"
       >
         <el-form-item>
-          <h1>登录账号</h1>
+          <h1>注册账号</h1>
         </el-form-item>
         <el-form-item label="用户名 :">
           <el-input v-model="username" style="width: 230px" />
@@ -32,16 +32,14 @@ let label = ref("");
           <el-input v-model="label" style="width: 230px" />
         </el-form-item>
         <el-form-item id="items">
-          <RouterLink to="/dashboard"
-            ><el-button type="success" class="item" style="width: 230px"
-              >登录</el-button
-            ></RouterLink
+          <el-button type="primary" class="item" style="width: 230px"
+            >注册</el-button
           >
         </el-form-item>
         <el-form-item>
-          <RouterLink to="/register"
-            ><el-button type="primary" style="width: 230px"
-              >注册</el-button
+          <RouterLink to="/login">
+            <el-button type="success" class="item" style="width: 230px"
+              >登录</el-button
             ></RouterLink
           >
         </el-form-item>
@@ -67,18 +65,18 @@ let label = ref("");
   );
 }
 #border {
-  border: 2px solid rgb(93, 155, 0);
-  background-color: #f9fff3;
+  border: 2px solid rgb(107, 154, 255);
   border-radius: 50px;
   padding: 100px;
   width: 500px;
   height: auto;
+  background-color: rgb(237, 246, 255);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 #border h1 {
-  color: rgb(93, 155, 0);
+  color: rgb(107, 154, 255);
   width: 100%;
   text-align: center;
 }

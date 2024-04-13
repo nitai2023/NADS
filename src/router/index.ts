@@ -1,6 +1,9 @@
 import { RouteRecordRaw, createRouter, createWebHashHistory } from "vue-router";
 import HomeView from "../view/HomeView.vue";
 import LoginView from "../view/LoginView.vue";
+import NotFoundViewVue from "../view/NotFoundView.vue";
+import DashBoardView from "../view/dashboard/DashBoardView.vue";
+import Register from "../view/Register.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -9,13 +12,28 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path:"/login",
-    name:"Login",
+    name:"login",
     component:LoginView
   }
   // {
   //   path: "/:pathMatch(.*)*",
   //   component: NotFoundViewVue,
   // },
+  ,
+  {
+    path:"/register",
+    name:"register",
+    component:Register
+  },
+  {
+    path: "/dashboard",
+    name: "dashboard",
+    component: DashBoardView,
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    component: NotFoundViewVue,
+  },
 ];
 
 const router = createRouter({

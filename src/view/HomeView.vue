@@ -3,11 +3,6 @@
   <div id="body">
     <nav>
       <p>网络资产探测系统</p>
-      <ul>
-        <li>关于</li>
-        <li>帮助</li>
-        <li>简介</li>
-      </ul>
     </nav>
     <hr />
     <main>
@@ -15,7 +10,11 @@
       <p>
         你说的对，但是网络资产探测系统实现了通过nmap对目标网络进行扫描，并对扫描结果进行可视化
       </p>
-      <RouterLink to="/login"><button>登录</button></RouterLink>
+      <RouterLink to="/login"
+        ><el-button style="width: 150px; height: 50px" type="success"
+          >登录</el-button
+        ></RouterLink
+      >
     </main>
   </div>
 </template>
@@ -26,44 +25,41 @@
   margin: 0;
 }
 #body {
-  width: 90vw;
+  width: 100vw;
   height: 100vh;
   margin: 0;
   background-image: linear-gradient(
-    to bottom right,
-    rgb(43, 78, 27),
-    rgb(147, 224, 83)
+    to left top,
+    rgb(99, 99, 99),
+    rgb(216, 216, 216)
   );
+}
+
+#body * {
+  text-align: center;
 }
 nav {
   height: 44px;
+  padding-left: 200px;
+  padding-right: 200px;
+  padding-top: 10px;
+  font-size: 20px;
 }
 nav p {
   display: inline;
   float: left;
 }
-nav ul {
-  display: inline;
-  float: right;
-}
-ul li {
-  list-style: none;
-  display: inline;
-  margin-left: 30px;
-}
 main {
   padding: 100px;
-  color: rgb(93, 155, 0);
+  color: #64ff17;
 }
 main h1 {
   margin-bottom: 50px;
+  font-size: 100px;
+  text-shadow: 10px 10px 10px #6f6f70;
 }
 main p {
-  margin-bottom: 30px;
-}
-main button {
-  width: 100px;
-  height: 50px;
-  border: 1px solid black;
+  margin-bottom: 100px;
+  font-size: 30px;
 }
 </style>
