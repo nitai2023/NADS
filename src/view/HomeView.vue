@@ -22,7 +22,7 @@ let label = ref("");
         <el-input type="password" autocomplete="off" v-model="password" />
       </el-form-item>
       <el-form-item label="验证码" prop="age">
-        <el-input v-model="label" style="width: 140px" />
+        <el-input v-model="label" style="width: 130px" />
       </el-form-item>
       <el-form-item>
         <el-button type="success">登录</el-button>
