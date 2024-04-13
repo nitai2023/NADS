@@ -28,6 +28,12 @@
 #body {
   width: 90vw;
   height: 100vh;
+  margin: 0;
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(43, 78, 27),
+    rgb(147, 224, 83)
+  );
 }
 nav {
   height: 44px;
