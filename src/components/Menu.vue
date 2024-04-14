@@ -30,19 +30,14 @@ const handleClose = (key: string, keyPath: string[]) => {
       @close="handleClose"
     >
       <el-menu-item>
-        <template #title><h2>管理员界面</h2></template>
+        <template #title><h2>菜单栏</h2></template>
       </el-menu-item>
-      <el-sub-menu index="1">
+      <el-menu-item index="/dashboard/scantaskmanagement">
+        <el-icon><location /></el-icon>
         <template #title>
-          <el-icon><location /></el-icon>
           <span>扫描任务管理</span>
         </template>
-        <el-menu-item-group>
-          <template #title><span>扫描任务管理</span></template>
-          <el-menu-item index="1-1">item one</el-menu-item>
-          <el-menu-item index="1-2">item two</el-menu-item>
-        </el-menu-item-group>
-      </el-sub-menu>
+      </el-menu-item>
       <el-menu-item index="/dashboard/assetquery">
         <el-icon><Menu /></el-icon>
         <template #title>资产查询</template>

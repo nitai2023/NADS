@@ -56,6 +56,7 @@ const tableData: User[] = [
       :total="50"
       class="mt-4"
     />
+
     <el-dialog v-model="AddDialog" title="添加用户" width="500">
       <div id="border">
         <el-form

@@ -7,6 +7,7 @@ import Register from "../view/RegisterView.vue";
 import AssetQuery from "../components/AssetQuery.vue";
 import VulnerabilityQuery from "../components/VulnerabilityQuery.vue";
 import UserManagement from "../components/UserManagement.vue";
+import STManagement from "../components/STManagement.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -31,7 +32,7 @@ const routes: Array<RouteRecordRaw> = [
       {path:"/dashboard/assetquery",component:AssetQuery},
       {path:"/dashboard/vulnerability",component:VulnerabilityQuery},
       {path:"/dashboard/usermanagement",component:UserManagement},
-
+      {path:"/dashboard/scantaskmanagement",component:STManagement}
     ]
   },
   {
