@@ -1,8 +1,22 @@
 <script setup lang="ts">
 import { ref } from "vue";
-let username = ref("");
-let password = ref("");
-let label = ref("");
+import { useUserStore } from "../store/user";
+let loginForm = ref({
+  username: "",
+  password: "",
+  captcha: "",
+});
+let captchaImg = ref(""); // 创建新的响应式引用
+const userStore = useUserStore();
+const getCaptcha = (username: string) => {
+  console.log(username);
+  userStore.getCaptcha(username).then((response) => {
+    let blob = response.data;
+    let imgUrl = window.URL.createObjectURL(blob);
+    // 更新captchaImg的值
+    captchaImg.value = imgUrl;
+  });
+};
 </script>
 <!-- Login View -->
 <template>
@@ -19,24 +33,30 @@ let label = ref("");
           <h1>登录</h1>
         </el-form-item>
         <el-form-item label="用户名 :">
-          <el-input v-model="username" style="width: 230px" />
+          <el-input v-model="loginForm.username" style="width: 230px" />
         </el-form-item>
         <el-form-item label="密码 :" prop="checkPass">
           <el-input
             type="password"
             autocomplete="off"
-            v-model="password"
+            v-model="loginForm.password"
             style="width: 230px"
           />
         </el-form-item>
         <el-form-item label="验证码 :" prop="age">
-          <el-input v-model="label" style="width: 230px" />
+          <el-input v-model="loginForm.captcha" style="width: 230px" />
+          <img id="captcha" :src="captchaImg" alt="验证码" />
+          <el-button type="primary" @click="getCaptcha(loginForm.username)"
+            >获取验证码</el-button
+          >
         </el-form-item>
         <el-form-item id="items">
-          <RouterLink to="/dashboard"
-            ><el-button type="success" class="item" style="width: 230px"
-              >登录</el-button
-            ></RouterLink
+          <el-button
+            type="success"
+            class="item"
+            style="width: 230px"
+            @click="userStore.userLogin(loginForm)"
+            >登录</el-button
           >
         </el-form-item>
         <el-form-item>
