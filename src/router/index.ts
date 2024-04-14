@@ -1,12 +1,12 @@
 import { RouteRecordRaw, createRouter, createWebHashHistory } from "vue-router";
+import AssetQuery from "../view/AssetQuery.vue";
 import HomeView from "../view/HomeView.vue";
 import LoginView from "../view/LoginView.vue";
 import NotFoundViewVue from "../view/NotFoundView.vue";
-import DashBoardView from "../view/dashboard/DashBoardView.vue";
 import Register from "../view/RegisterView.vue";
-import AssetQuery from "../components/AssetQuery.vue";
-import VulnerabilityQuery from "../components/VulnerabilityQuery.vue";
-import UserManagement from "../components/UserManagement.vue";
+import UserManagement from "../view/UserManagement.vue";
+import VulnerabilityQuery from "../view/VulnerabilityQuery.vue";
+import DashBoardView from "../view/dashboard/DashBoardView.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -27,12 +27,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/dashboard",
     name: "dashboard",
     component: DashBoardView,
-    children:[
-      {path:"/dashboard/assetquery",component:AssetQuery},
-      {path:"/dashboard/vulnerability",component:VulnerabilityQuery},
-      {path:"/dashboard/usermanagement",component:UserManagement},
-
-    ]
+    children: [
+      { path: "/dashboard/assetquery", component: AssetQuery },
+      { path: "/dashboard/vulnerability", component: VulnerabilityQuery },
+      { path: "/dashboard/usermanagement", component: UserManagement },
+    ],
   },
   {
     path: "/:pathMatch(.*)*",

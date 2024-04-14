@@ -18,12 +18,11 @@ export const useUserStore = defineStore("user", () => {
   };
   // 用户登录
   const userLogin = async (form: loginForm) => {
-    const token = await userLoginAPI(form);
-    let d = new Date();
-    d.setTime(d.getTime() + 3 * 60 * 60 * 1000); // 3小时毫秒计时
-    let expires = "expires=" + d.toUTCString();
-    document.cookie = `token=${token}; ${expires}; path=/`;
-    router.push("/dashboard");
+    const res = (await userLoginAPI(form)).data;
+    if (res.data) {
+      localStorage.setItem("token", res.data.token);
+      router.push("/dashboard");
+    }
   };
   const userLogout = async () => {
     await userLogoutAPI();
