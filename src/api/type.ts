@@ -8,6 +8,23 @@ import {
   updateUserInfoForm,
 } from "./model";
 
+// 读取cookie
+let getCookie = (cookieName: string) => {
+  let name = cookieName + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let cookieArray = decodedCookie.split(";");
+  for (let i = 0; i < cookieArray.length; i++) {
+    let c = cookieArray[i];
+    while (c.charAt(0) == " ") {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+};
+
 // Start 用户相关接口
 
 // 登录
@@ -20,20 +37,23 @@ export const userLoginAPI = (form: loginForm) => {
 };
 
 // 获取验证码
-export const getCaptchaAPI = () => {
+export const getCaptchaAPI = (username: string) => {
   return request({
     method: "GET",
-    url: "/api/login/captcha",
+    responseType: "blob",
+    url: `/api/login/captcha?username=${username}`,
   });
 };
 
+// responseType: "blob",
+
 // 登出
-export const userLogoutAPI = (token: string) => {
+export const userLogoutAPI = () => {
   return request({
     method: "GET",
     url: "/api/logout",
     headers: {
-      token,
+      token: getCookie("token"),
     },
   });
 };
@@ -57,6 +77,9 @@ export const updatePasswordAPI = (form: updatePawwsordForm) => {
     method: "POST",
     url: "/admin/updatePassword",
     data: form,
+    headers: {
+      token: getCookie("token"),
+    },
   });
 };
 
@@ -66,6 +89,9 @@ export const updateUserInfoAPI = (form: updateUserInfoForm) => {
     method: "PUT",
     url: "/admin/user",
     data: form,
+    headers: {
+      token: getCookie("token"),
+    },
   });
 };
 
@@ -75,6 +101,9 @@ export const addUserAPI = (form: newUserForm) => {
     method: "POST",
     url: "/admin/user",
     data: form,
+    headers: {
+      token: getCookie("token"),
+    },
   });
 };
 
@@ -83,6 +112,9 @@ export const deleteUserdAPI = (id: number) => {
   return request({
     method: "DELETE",
     url: `/admin/user/${id}`,
+    headers: {
+      token: getCookie("token"),
+    },
   });
 };
 
@@ -114,5 +146,13 @@ export const searchAptAPI = (form: pageList) => {
 // End APT
 
 // Start 定向资产
+
+// 定向资产添加
+// export const searchDirectAPI = (id: number) => {
+//   return request({
+//     method: "GET",
+//     url: "/property/direct",
+//   });
+// };
 
 // End 定向资产
