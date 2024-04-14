@@ -9,20 +9,8 @@ import {
 } from "./model";
 
 // 读取cookie
-let getCookie = (cookieName: string) => {
-  let name = cookieName + "=";
-  let decodedCookie = decodeURIComponent(document.cookie);
-  let cookieArray = decodedCookie.split(";");
-  for (let i = 0; i < cookieArray.length; i++) {
-    let c = cookieArray[i];
-    while (c.charAt(0) == " ") {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
+let getToken = () => {
+  return localStorage.getItem("token");
 };
 
 // Start 用户相关接口
@@ -53,7 +41,7 @@ export const userLogoutAPI = () => {
     method: "GET",
     url: "/api/logout",
     headers: {
-      token: getCookie("token"),
+      token: getToken(),
     },
   });
 };
@@ -78,7 +66,7 @@ export const updatePasswordAPI = (form: updatePawwsordForm) => {
     url: "/admin/updatePassword",
     data: form,
     headers: {
-      token: getCookie("token"),
+      token: getToken(),
     },
   });
 };
@@ -90,7 +78,7 @@ export const updateUserInfoAPI = (form: updateUserInfoForm) => {
     url: "/admin/user",
     data: form,
     headers: {
-      token: getCookie("token"),
+      token: getToken(),
     },
   });
 };
@@ -102,7 +90,7 @@ export const addUserAPI = (form: newUserForm) => {
     url: "/admin/user",
     data: form,
     headers: {
-      token: getCookie("token"),
+      token: getToken(),
     },
   });
 };
@@ -113,7 +101,7 @@ export const deleteUserdAPI = (id: number) => {
     method: "DELETE",
     url: `/admin/user/${id}`,
     headers: {
-      token: getCookie("token"),
+      token: getToken(),
     },
   });
 };

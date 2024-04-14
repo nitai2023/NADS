@@ -78,24 +78,25 @@ const getCaptcha = (username: string) => {
 #body {
   width: 100vw;
   height: 100vh;
+  background-image: linear-gradient(135deg, #f5f7fa 0%, #b1bfd5 100%);
+
   display: flex;
   justify-content: center;
   align-items: center;
 }
 #border {
-  border: 2px solid rgb(107, 154, 255);
   border-radius: 50px;
-  box-shadow: 10px 10px 5px rgb(182, 182, 182);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
   padding: 50px;
   width: 400px;
   height: auto;
-  background-color: rgb(237, 246, 255);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 #border h1 {
-  color: rgb(93, 155, 0);
+  color: rgb(79, 79, 79);
   width: 100%;
   text-align: center;
 }
