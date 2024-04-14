@@ -15,7 +15,7 @@ let label = ref("");
         class="demo-ruleForm"
       >
         <el-form-item>
-          <h1>注册账号</h1>
+          <h1>注册</h1>
         </el-form-item>
         <el-form-item label="用户名 :">
           <el-input v-model="username" style="width: 230px" />
@@ -58,17 +58,13 @@ let label = ref("");
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: linear-gradient(
-    to left top,
-    rgb(99, 99, 99),
-    rgb(216, 216, 216)
-  );
+  background-color: rgb(235, 235, 235);
 }
 #border {
   border: 2px solid rgb(107, 154, 255);
   border-radius: 50px;
-  padding: 100px;
-  width: 500px;
+  padding: 50px;
+  width: 400px;
   height: auto;
   background-color: rgb(237, 246, 255);
   display: flex;

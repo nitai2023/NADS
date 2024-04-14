@@ -2,17 +2,22 @@
 <template>
   <div id="body">
     <nav>
-      <p>网络资产探测系统</p>
+      <p>
+        <el-icon><House /></el-icon> 主页
+      </p>
     </nav>
     <hr />
     <main>
-      <h1>网络资产探测系统</h1>
-      <p>
-        你说的对，但是网络资产探测系统实现了通过nmap对目标网络进行扫描，并对扫描结果进行可视化
-      </p>
+      <h1>NADS</h1>
+      <h2>网络资产探测系统</h2>
       <RouterLink to="/login"
-        ><el-button style="width: 150px; height: 50px" type="success"
+        ><el-button style="width: 150px; height: 50px" type="success" round
           >登录</el-button
+        ></RouterLink
+      >
+      <RouterLink to="/register"
+        ><el-button style="width: 150px; height: 50px" type="primary" plain
+          >注册</el-button
         ></RouterLink
       >
     </main>
@@ -28,11 +33,6 @@
   width: 100vw;
   height: 100vh;
   margin: 0;
-  background-image: linear-gradient(
-    to left top,
-    rgb(99, 99, 99),
-    rgb(216, 216, 216)
-  );
 }
 
 #body * {
@@ -40,9 +40,8 @@
 }
 nav {
   height: 44px;
-  padding-left: 200px;
+  padding-left: 100px;
   padding-right: 200px;
-  padding-top: 10px;
   font-size: 20px;
 }
 nav p {
@@ -54,12 +53,20 @@ main {
   color: #64ff17;
 }
 main h1 {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   font-size: 100px;
-  text-shadow: 10px 10px 10px #6f6f70;
+  background-image: linear-gradient(to right bottom, #35eb9a, #50a2ff);
+  color: transparent;
+  background-clip: text;
 }
-main p {
-  margin-bottom: 100px;
+main h2 {
+  font-size: 80px;
+  color: black;
+  margin-bottom: 90px;
+}
+main button {
   font-size: 30px;
+  border-radius: 30px;
+  margin-left: 30px;
 }
 </style>
