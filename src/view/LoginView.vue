@@ -61,11 +61,11 @@ let label = ref("");
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(235, 235, 235);
 }
 #border {
   border: 2px solid rgb(107, 154, 255);
   border-radius: 50px;
+  box-shadow: 10px 10px 5px rgb(182, 182, 182);
   padding: 50px;
   width: 400px;
   height: auto;

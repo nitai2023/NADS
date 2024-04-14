@@ -4,6 +4,9 @@ import LoginView from "../view/LoginView.vue";
 import NotFoundViewVue from "../view/NotFoundView.vue";
 import DashBoardView from "../view/dashboard/DashBoardView.vue";
 import Register from "../view/RegisterView.vue";
+import AssetQuery from "../components/AssetQuery.vue";
+import VulnerabilityQuery from "../components/VulnerabilityQuery.vue";
+import UserManagement from "../components/UserManagement.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -24,6 +27,12 @@ const routes: Array<RouteRecordRaw> = [
     path: "/dashboard",
     name: "dashboard",
     component: DashBoardView,
+    children:[
+      {path:"/dashboard/assetquery",component:AssetQuery},
+      {path:"/dashboard/vulnerability",component:VulnerabilityQuery},
+      {path:"/dashboard/usermanagement",component:UserManagement},
+
+    ]
   },
   {
     path: "/:pathMatch(.*)*",

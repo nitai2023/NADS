@@ -18,10 +18,21 @@ import Menu from "../../components/Menu.vue";
 <style scoped lang="scss">
 .dashboard-view {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100vw;
   height: 100vh;
+
+  aside {
+    height: 100%;
+
+    .menu-container {
+      height: 100%;
+    }
+  }
+
+  main {
+    width: 100%;
+    div {
+      width: 100%;
+    }
+  }
 }
 </style>
