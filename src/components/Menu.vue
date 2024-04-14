@@ -15,18 +15,9 @@ const handleClose = (key: string, keyPath: string[]) => {
   console.log(key, keyPath);
 };
 </script>
-
+<!-- Menu -->
 <template>
   <div class="menu-container">
-    <!-- <el-radio-group
-      class="menu-collapse"
-      fill="rgb(57, 159, 72)"
-      v-model="isCollapse"
-      style="height: 32px; margin-bottom: 20px"
-    >
-      <el-radio-button :value="false">展开</el-radio-button>
-      <el-radio-button :value="true">折叠</el-radio-button>
-    </el-radio-group> -->
     <el-menu
       default-active="2"
       class="el-menu-vertical-demo"
@@ -85,6 +76,9 @@ const handleClose = (key: string, keyPath: string[]) => {
       width: 100%;
       color: green;
       text-align: center;
+    }
+    .el-menu-item {
+      display: flex;
     }
   }
 }

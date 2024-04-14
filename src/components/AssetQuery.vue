@@ -23,6 +23,7 @@ const tableData: User[] = [
   },
 ];
 </script>
+<!-- Asset Query -->
 <template>
   <div>
     <el-table row-key="date" :data="tableData" style="width: 100%">

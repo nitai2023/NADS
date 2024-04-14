@@ -79,6 +79,7 @@ let label = ref("");
   width: 100%;
   text-align: center;
 }
+
 a {
   width: 100%;
   text-decoration: none;
