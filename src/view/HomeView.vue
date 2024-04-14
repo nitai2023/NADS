@@ -1,4 +1,5 @@
 <script setup lang="ts"></script>
+<!-- Home View -->
 <template>
   <div id="body">
     <nav>

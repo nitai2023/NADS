@@ -3,7 +3,7 @@ import HomeView from "../view/HomeView.vue";
 import LoginView from "../view/LoginView.vue";
 import NotFoundViewVue from "../view/NotFoundView.vue";
 import DashBoardView from "../view/dashboard/DashBoardView.vue";
-import Register from "../view/Register.vue";
+import Register from "../view/RegisterView.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",

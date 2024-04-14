@@ -7,7 +7,9 @@ import Menu from "../../components/Menu.vue";
     <aside>
       <Menu></Menu>
     </aside>
-    <main></main>
+    <main>
+      <RouterView></RouterView>
+    </main>
     <!-- E Comment Menu -->
   </div>
 </template>
