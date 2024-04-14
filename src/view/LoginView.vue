@@ -4,6 +4,7 @@ let username = ref("");
 let password = ref("");
 let label = ref("");
 </script>
+<!-- Login View -->
 <template>
   <div id="body">
     <div id="border">

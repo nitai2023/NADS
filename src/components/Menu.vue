@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import {
-  Document,
-  Menu as IconMenu,
-  Location,
-  Setting,
-} from "@element-plus/icons-vue";
+// import {
+//   Document,
+//   Menu as IconMenu,
+//   Location,
+//   Setting,
+// } from "@element-plus/icons-vue";
 import { ref } from "vue";
 
 const isCollapse = ref(true);
@@ -33,6 +33,7 @@ const handleClose = (key: string, keyPath: string[]) => {
       :collapse="isCollapse"
       text-color=" #6F6F6F"
       active-text-color="rgb(57, 159, 72)"
+      router="true"
       @open="handleOpen"
       @close="handleClose"
     >
@@ -48,7 +49,7 @@ const handleClose = (key: string, keyPath: string[]) => {
         </el-menu-item-group>
       </el-sub-menu>
       <el-menu-item index="2">
-        <el-icon><icon-menu /></el-icon>
+        <el-icon><Menu /></el-icon>
         <template #title>资产查询</template>
       </el-menu-item>
       <el-menu-item index="3">
