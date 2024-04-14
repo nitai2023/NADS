@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Menu from "../../components/Menu.vue";
 </script>
+<!-- 组件：仪表盘 -->
 <template>
   <div class="dashboard-view">
     <!-- S Comment Menu -->

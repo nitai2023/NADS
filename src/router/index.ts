@@ -11,19 +11,14 @@ const routes: Array<RouteRecordRaw> = [
     component: HomeView,
   },
   {
-    path:"/login",
-    name:"login",
-    component:LoginView
-  }
-  // {
-  //   path: "/:pathMatch(.*)*",
-  //   component: NotFoundViewVue,
-  // },
-  ,
+    path: "/login",
+    name: "login",
+    component: LoginView,
+  },
   {
-    path:"/register",
-    name:"register",
-    component:Register
+    path: "/register",
+    name: "register",
+    component: Register,
   },
   {
     path: "/dashboard",
