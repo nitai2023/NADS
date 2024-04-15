@@ -2,7 +2,6 @@ import axios from "axios";
 import { ElMessage } from "element-plus";
 import { apiConfig } from "../config";
 
-import router from "../router";
 const request = axios.create({
   baseURL: apiConfig.directUrl,
   timeout: 5000,
@@ -49,10 +48,10 @@ request.interceptors.response.use(
           break;
         case 500:
           error.message = "服务器端出错";
-          router.push("/login");
-          location.reload();
-          localStorage.removeItem("token");
-          localStorage.removeItem("user");
+          // router.push("/login");
+          // location.reload();
+          // localStorage.removeItem("token");
+          // localStorage.removeItem("user");
           break;
         case 501:
           error.message = "网络未实现";

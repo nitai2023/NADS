@@ -4,6 +4,7 @@ import HomeView from "../view/HomeView.vue";
 import LoginView from "../view/LoginView.vue";
 import NotFoundViewVue from "../view/NotFoundView.vue";
 import Register from "../view/RegisterView.vue";
+import TaskManagementView from "../view/TaskManagementView.vue";
 import UserManagement from "../view/UserManagement.vue";
 import VulnerabilityQuery from "../view/VulnerabilityQuery.vue";
 import DashBoardView from "../view/dashboard/DashBoardView.vue";
@@ -31,6 +32,7 @@ const routes: Array<RouteRecordRaw> = [
       { path: "/dashboard/assetquery", component: AssetQuery },
       { path: "/dashboard/vulnerability", component: VulnerabilityQuery },
       { path: "/dashboard/usermanagement", component: UserManagement },
+      { path: "/dashboard/taskmanagement", component: TaskManagementView },
     ],
   },
   {

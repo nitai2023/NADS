@@ -1,32 +1,49 @@
 <script lang="ts" setup>
-// import {
-//   Document,
-//   Menu as IconMenu,
-//   Location,
-//   Setting,
-// } from "@element-plus/icons-vue";
+import { InfoFilled } from "@element-plus/icons-vue";
+import { ElMessage } from "element-plus";
 import { ref } from "vue";
+import { forgetPawwsordForm } from "../api/model";
+
+import { useUserStore } from "../store/user";
 
 const isCollapse = ref(false);
+const userStore = useUserStore();
+const seakPasswordVisible = ref(false);
+const forgetPawwsordForm = ref({
+  confirmPassword: "",
+  newPassword: "",
+  username: "",
+});
+
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath);
 };
 const handleClose = (key: string, keyPath: string[]) => {
   console.log(key, keyPath);
 };
+
+// 登出账号
+const logout = async () => {
+  await userStore.userLogout();
+  ElMessage({
+    type: "success",
+    message: "账号退出成功",
+  });
+};
+
+// 找回密码
+const forgetPassword = async (forgetPawwsordForm: forgetPawwsordForm) => {
+  await userStore.ForgetPassword(forgetPawwsordForm);
+  ElMessage({
+    type: "success",
+    message: "密码重置成功",
+  });
+  seakPasswordVisible.value = false;
+};
 </script>
 
 <template>
   <div class="menu-container">
-    <!-- <el-radio-group
-      class="menu-collapse"
-      fill="rgb(57, 159, 72)"
-      v-model="isCollapse"
-      style="height: 32px; margin-bottom: 20px"
-    >
-      <el-radio-button :value="false">展开</el-radio-button>
-      <el-radio-button :value="true">折叠</el-radio-button>
-    </el-radio-group> -->
     <el-menu
       default-active="2"
       class="el-menu-vertical-demo"
@@ -41,34 +58,81 @@ const handleClose = (key: string, keyPath: string[]) => {
       <el-menu-item>
         <template #title><h2>管理员界面</h2></template>
       </el-menu-item>
-      <el-sub-menu index="1">
-        <template #title>
-          <el-icon><location /></el-icon>
-          <span>扫描任务管理</span>
-        </template>
-        <el-menu-item-group>
-          <template #title><span>扫描任务管理</span></template>
-          <el-menu-item index="1-1">item one</el-menu-item>
-          <el-menu-item index="1-2">item two</el-menu-item>
-        </el-menu-item-group>
-      </el-sub-menu>
-      <el-menu-item index="/dashboard/assetquery">
+      <el-menu-item index="1" route="/dashboard/taskmanagement">
+        <el-icon><Menu /></el-icon>
+        <template #title>扫描任务管理</template>
+      </el-menu-item>
+      <el-menu-item index="2" route="/dashboard/assetquery">
         <el-icon><Menu /></el-icon>
         <template #title>资产查询</template>
       </el-menu-item>
-      <el-menu-item index="/dashboard/vulnerability">
+      <el-menu-item index="3" route="/dashboard/vulnerability">
         <el-icon><document /></el-icon>
         <template #title>漏洞查询</template>
       </el-menu-item>
-      <el-menu-item index="/dashboard/usermanagement">
+      <el-menu-item index="4" route="/dashboard/usermanagement">
         <el-icon><setting /></el-icon>
         <template #title>用户管理</template>
       </el-menu-item>
       <el-menu-item>
-        <el-button type="danger">登出</el-button>
+        <el-popconfirm
+          width="220"
+          confirm-button-text="OK"
+          cancel-button-text="No, Thanks"
+          :icon="InfoFilled"
+          icon-color="#626AEF"
+          title="Are you sure to logout?"
+          @confirm="() => logout()"
+        >
+          <template #reference>
+            <el-button type="danger">登出账号</el-button>
+          </template>
+        </el-popconfirm>
+      </el-menu-item>
+      <el-menu-item>
+        <el-button type="primary" @click="seakPasswordVisible = true"
+          >忘记密码</el-button
+        >
       </el-menu-item>
     </el-menu>
   </div>
+  <el-dialog v-model="seakPasswordVisible" title="找回密码" width="500">
+    <div id="border">
+      <el-form
+        label-position="top"
+        style="max-width: 600px"
+        :model="forgetPawwsordForm"
+        status-icon
+        label-width="auto"
+        class="demo-ruleForm"
+      >
+        <div class="form-row">
+          <el-form-item label="用户名 :">
+            <el-input v-model="forgetPawwsordForm.username" />
+          </el-form-item>
+          <el-form-item label="新密码 :">
+            <el-input v-model="forgetPawwsordForm.newPassword" />
+          </el-form-item>
+        </div>
+        <div class="form-row">
+          <el-form-item label="确认密码:">
+            <el-input v-model="forgetPawwsordForm.confirmPassword" />
+          </el-form-item>
+        </div>
+        <div class="form-row">
+          <el-form-item>
+            <el-button
+              type="primary"
+              class="item"
+              style="width: 130px"
+              @click="forgetPassword(forgetPawwsordForm)"
+              >修改</el-button
+            >
+          </el-form-item>
+        </div>
+      </el-form>
+    </div>
+  </el-dialog>
 </template>
 
 <style>

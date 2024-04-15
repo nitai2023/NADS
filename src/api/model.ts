@@ -43,3 +43,28 @@ export interface newUserForm {
   password: string;
   username: string;
 }
+
+export interface newAssetForm {
+  accountName: string;
+  ip: string;
+  nodeName: string;
+  sshKey: number;
+  sshPort: number;
+}
+
+export interface updateAssetForm {
+  accountName?: string;
+  id: number;
+  ip?: string;
+  nodeName?: string;
+  sshKey?: number;
+  sshPort?: number;
+}
+
+export interface newTaskForm {
+  endIp: string;
+  endPort: number;
+  name: string;
+  startIp: string;
+  startPort: number;
+}

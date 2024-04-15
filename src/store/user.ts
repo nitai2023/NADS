@@ -24,9 +24,13 @@ export const useUserStore = defineStore("user", () => {
       router.push("/dashboard");
     }
   };
+  // 用户登出
   const userLogout = async () => {
     await userLogoutAPI();
+    localStorage.removeItem("token");
+    router.push("/login");
   };
+  // 忘记密码
   const ForgetPassword = async (form: forgetPawwsordForm) => {
     await ForgetPasswordAPI(form);
   };

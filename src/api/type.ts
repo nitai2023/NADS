@@ -2,8 +2,11 @@ import request from ".";
 import {
   forgetPawwsordForm,
   loginForm,
+  newAssetForm,
+  newTaskForm,
   newUserForm,
   pageList,
+  updateAssetForm,
   updatePawwsordForm,
   updateUserInfoForm,
 } from "./model";
@@ -110,10 +113,9 @@ export const deleteUserdAPI = (id: number) => {
 export const searchUserListdAPI = (form: pageList) => {
   return request({
     method: "GET",
-    url: "/admin/user/list",
+    url: `/admin/user/list?pageNumber=${form.pageNumber}&pageSize=${form.pageSize}`,
     headers: {
-      pageNumber: form.pageNumber,
-      pageSize: form.pageSize,
+      token: getToken(),
     },
   });
 };
@@ -135,12 +137,62 @@ export const searchAptAPI = (form: pageList) => {
 
 // Start 定向资产
 
-// 定向资产添加
-// export const searchDirectAPI = (id: number) => {
-//   return request({
-//     method: "GET",
-//     url: "/property/direct",
-//   });
-// };
+// 定向资产查询
+export const searchAssetAPI = (form: pageList) => {
+  return request({
+    method: "GET",
+    url: `/property/direct?pageNumber=${form.pageNumber}&pageSize=${form.pageSize}`,
+    headers: {
+      token: getToken(),
+    },
+  });
+};
+
+// 定向资产节点添加
+export const addAssetAPI = (form: newAssetForm) => {
+  return request({
+    method: "POST",
+    url: `/property/direct`,
+    headers: {
+      token: getToken(),
+    },
+    data: form,
+  });
+};
+
+// 定向资产节点修改
+export const updateAssetAPI = (form: updateAssetForm) => {
+  return request({
+    method: "PUT",
+    url: `/property/direct`,
+    headers: {
+      token: getToken(),
+    },
+    data: form,
+  });
+};
+
+// 定向资产节点删除
+export const deleteAssetAPI = (nodeId: number) => {
+  return request({
+    method: "DELETE",
+    url: `/property/direct/${nodeId}`,
+    headers: {
+      token: getToken(),
+    },
+  });
+};
+
+// 创建任务
+export const addTaskAPI = (form: newTaskForm) => {
+  return request({
+    method: "POST",
+    url: `/property/task`,
+    headers: {
+      token: getToken(),
+    },
+    data: form,
+  });
+};
 
 // End 定向资产

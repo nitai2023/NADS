@@ -19,16 +19,17 @@ export const useAdminStore = defineStore("admin", () => {
     updatePasswordAPI(form);
   };
   const updateUserInfo = async (form: updateUserInfoForm) => {
-    updateUserInfoAPI(form);
+    await updateUserInfoAPI(form);
   };
   const addUser = async (form: newUserForm) => {
-    addUserAPI(form);
+    await addUserAPI(form);
   };
   const deleteUserd = async (id: number) => {
-    deleteUserdAPI(id);
+    await deleteUserdAPI(id);
   };
   const searchUserListd = async (form: pageList) => {
-    searchUserListdAPI(form);
+    const res = await searchUserListdAPI(form);
+    return res.data.data;
   };
   const searchApt = async (form: pageList) => {
     searchAptAPI(form);
