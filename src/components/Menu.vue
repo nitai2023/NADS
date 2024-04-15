@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { InfoFilled } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
 import { ref } from "vue";
 import { forgetPawwsordForm } from "../api/model";
@@ -43,21 +42,21 @@ const forgetPassword = async (forgetPawwsordForm: forgetPawwsordForm) => {
 </script>
 
 <template>
-  <div class="menu-container">
+  <div class="menu-container menu">
+    <h2 style="margin: 0; text-align: center; padding: 10p; color: white">
+      菜单栏
+    </h2>
     <el-menu
       default-active="2"
       class="el-menu-vertical-demo"
+      style="background-color: transparent"
       :collapse="isCollapse"
-      text-color=" #6F6F6F"
-      active-text-color="rgb(57, 159, 72)"
+      text-color=" rgb(89, 0, 161)"
+      active-text-color="rgb(255, 255, 255)"
       :router="true"
-      style="height: calc(100% - 52px)"
       @open="handleOpen"
       @close="handleClose"
     >
-      <el-menu-item>
-        <template #title><h2>管理员界面</h2></template>
-      </el-menu-item>
       <el-menu-item index="1" route="/dashboard/taskmanagement">
         <el-icon><Menu /></el-icon>
         <template #title>扫描任务管理</template>
@@ -74,27 +73,23 @@ const forgetPassword = async (forgetPawwsordForm: forgetPawwsordForm) => {
         <el-icon><setting /></el-icon>
         <template #title>用户管理</template>
       </el-menu-item>
-      <el-menu-item>
-        <el-popconfirm
-          width="220"
-          confirm-button-text="OK"
-          cancel-button-text="No, Thanks"
-          :icon="InfoFilled"
-          icon-color="#626AEF"
-          title="Are you sure to logout?"
-          @confirm="() => logout()"
-        >
-          <template #reference>
-            <el-button type="danger">登出账号</el-button>
-          </template>
-        </el-popconfirm>
-      </el-menu-item>
-      <el-menu-item>
-        <el-button type="primary" @click="seakPasswordVisible = true"
-          >忘记密码</el-button
-        >
-      </el-menu-item>
     </el-menu>
+    <el-popconfirm
+      width="220"
+      confirm-button-text="OK"
+      cancel-button-text="No, Thanks"
+      :icon="InfoFilled"
+      icon-color="#626AEF"
+      title="Are you sure to logout?"
+      @confirm="() => logout()"
+    >
+      <template #reference>
+        <el-button type="danger" text bg>登出账号</el-button>
+      </template>
+    </el-popconfirm>
+    <el-button type="primary" @click="seakPasswordVisible = true" text bg
+      >忘记密码</el-button
+    >
   </div>
   <el-dialog v-model="seakPasswordVisible" title="找回密码" width="500">
     <div id="border">
@@ -136,6 +131,12 @@ const forgetPassword = async (forgetPawwsordForm: forgetPawwsordForm) => {
 </template>
 
 <style>
+.menu {
+  height: 100vh;
+  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
 .menu-container {
   .menu-collapse {
     display: flex;
@@ -144,10 +145,10 @@ const forgetPassword = async (forgetPawwsordForm: forgetPawwsordForm) => {
   .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 200px;
     min-height: 400px;
-    --text-color: rgb(57, 159, 72);
+    --text-color: rgb(166, 166, 166);
     h2 {
       width: 100%;
-      color: green;
+      color: rgb(255, 255, 255);
       text-align: center;
     }
   }
