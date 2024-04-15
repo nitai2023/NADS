@@ -19,17 +19,17 @@ export const useAssetStore = defineStore("asset", () => {
     return res.data.data;
   };
   const addAsset = async (form: newAssetForm) => {
-    const res = await addAssetAPI(form);
+    await addAssetAPI(form);
   };
   const updateAsset = async (form: updateAssetForm) => {
-    const res = await updateAssetAPI(form);
+    await updateAssetAPI(form);
   };
   const deleteAsset = async (nodeId: number) => {
     const res = await deleteAssetAPI(nodeId);
     return res.data.data;
   };
   const addTask = async (form: newTaskForm) => {
-    const res = await addTaskAPI(form);
+    await addTaskAPI(form);
   };
   return {
     searchAsset,
