@@ -75,24 +75,38 @@ onMounted(async () => {
 <!-- UserManangement -->
 <template>
   <div>
-    <el-table row-key="date" :data="tableData" style="width: 100%">
-      <el-table-column prop="id" label="id" width="180" #empty />
-      <el-table-column prop="username" label="username" width="180" #empty />
-      <el-table-column prop="isAdmin" label="IsAdmin" width="180" #empty />
-      <el-table-column prop="name" label="Name" width="180" #empty />
-      <el-table-column prop="characterName" label="CharacterName" #empty />
-      <el-table-column prop="characterName" label="CharacterName" #empty />
+    <el-table row-key="date" :data="userListInfo.list" style="width: 100%">
+      <el-table-column prop="id" label="id" width="180" />
+      <el-table-column prop="username" label="username" width="180" />
+      <el-table-column prop="name" label="name" width="180" />
+      <el-table-column prop="characterName" label="characterName" width="180" />
+      <el-table-column prop="isAdmin" label="sshKey" />
       <el-table-column>
         <template #header>
-          <el-button size="small" type="success" @click="dialogVisible = true"
-            >Add</el-button
+          <el-button size="small" type="success" @click="addVisible = true"
+            >添加</el-button
           >
         </template>
-        <template #default>
-          <el-button size="small" type="primary">Edit</el-button>
-          <el-button size="small" type="danger">Delete</el-button>
-        </template></el-table-column
-      >
+
+        <template #default="scope">
+          <el-button size="small" type="primary" @click="getUserInfo(scope.row)"
+            >修改</el-button
+          >
+          <el-popconfirm
+            width="220"
+            confirm-button-text="OK"
+            cancel-button-text="No, Thanks"
+            :icon="InfoFilled"
+            icon-color="#626AEF"
+            title="Are you sure to delete this?"
+            @confirm="() => deleteUser(scope.row.id)"
+          >
+            <template #reference>
+              <el-button size="small" type="danger">删除</el-button>
+            </template>
+          </el-popconfirm>
+        </template>
+      </el-table-column>
     </el-table>
     <el-pagination
       small
@@ -101,7 +115,8 @@ onMounted(async () => {
       v-model:current-page="pageForm.pageNumber"
       :page-count="userListInfo.pages"
     />
-    <el-dialog v-model="dialogVisible" title="添加用户" width="500">
+    <!-- S Component 添加任务 -->
+    <el-dialog v-model="addVisible" title="添加任务" width="500">
       <div id="border">
         <el-form
           label-position="top"
@@ -112,25 +127,25 @@ onMounted(async () => {
           class="demo-ruleForm"
         >
           <div class="form-row">
-            <el-form-item label="管理员">
-              <el-switch v-model="newUserInfo.isAdmin" />
+            <el-form-item label="name :">
+              <el-input />
             </el-form-item>
           </div>
           <div class="form-row">
-            <el-form-item label="用户名 :">
-              <el-input v-model="newUserInfo.username" />
+            <el-form-item label="startIp :">
+              <el-input />
             </el-form-item>
-            <el-form-item label="姓名 :">
-              <el-input v-model="newUserInfo.name" />
+            <el-form-item label="endIp :">
+              <el-input />
             </el-form-item>
           </div>
           <div class="form-row">
-            <el-form-item label="角色名 :">
-              <el-input v-model="newUserInfo.characterName" />
+            <el-form-item label="startPort :">
+              <el-input />
             </el-form-item>
 
-            <el-form-item label="密码 :" prop="checkPass">
-              <el-input v-model="newUserInfo.password" />
+            <el-form-item label="endPort :">
+              <el-input />
             </el-form-item>
           </div>
           <div class="form-row">
@@ -140,13 +155,59 @@ onMounted(async () => {
                 class="item"
                 style="width: 130px"
                 @click="addUser(newUserInfo)"
-                >注册</el-button
+                >添加</el-button
               >
             </el-form-item>
           </div>
         </el-form>
       </div>
     </el-dialog>
+    <!-- E Component 添加任务 -->
+
+    <!-- S Component 修改任务 -->
+    <el-dialog v-model="updateVisible" title="修改用户信息" width="500">
+      <div id="border">
+        <el-form
+          label-position="top"
+          style="max-width: 600px"
+          :model="UserInfo"
+          status-icon
+          label-width="auto"
+          class="demo-ruleForm"
+        >
+          <div class="form-row">
+            <el-form-item label="isAdmin :">
+              <el-switch v-model="UserInfo.isAdmin" size="large" />
+            </el-form-item>
+          </div>
+          <div class="form-row">
+            <el-form-item label="name :">
+              <el-input v-model="UserInfo.name" />
+            </el-form-item>
+            <el-form-item label="characterName :">
+              <el-input v-model="UserInfo.characterName" />
+            </el-form-item>
+          </div>
+          <div class="form-row">
+            <el-form-item label="username :">
+              <el-input v-model="UserInfo.username" />
+            </el-form-item>
+          </div>
+          <div class="form-row">
+            <el-form-item>
+              <el-button
+                type="primary"
+                class="item"
+                style="width: 130px"
+                @click="updateUserInfo(UserInfo)"
+                >修改</el-button
+              >
+            </el-form-item>
+          </div>
+        </el-form>
+      </div>
+    </el-dialog>
+    <!-- E Component 修改资产 -->
   </div>
 </template>
 <style>

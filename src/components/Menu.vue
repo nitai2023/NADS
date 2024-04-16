@@ -34,9 +34,6 @@ const logout = async () => {
       active-text-color="rgb(255, 255, 255)"
       :router="true"
     >
-      <el-menu-item>
-        <template #title><h2>菜单栏</h2></template>
-      </el-menu-item>
       <el-menu-item index="1" route="/dashboard/taskmanagement">
         <el-icon><Menu /></el-icon>
         <template #title>扫描任务管理</template>
