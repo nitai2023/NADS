@@ -4,9 +4,6 @@ import { onMounted, ref, watch } from "vue";
 import { newAssetForm, updateAssetForm } from "../api/model";
 import { useAssetStore } from "../store/asset";
 
-let addVisible = ref(false);
-let updateVisible = ref(false);
-
 let assetListInfo = ref([]);
 let pageForm = ref({
   pageNumber: 1,
@@ -27,6 +24,9 @@ let assetInfo = ref({
   sshKey: 0,
   sshPort: 0,
 });
+
+let addVisible = ref(false);
+let updateVisible = ref(false);
 
 const assetStore = useAssetStore();
 

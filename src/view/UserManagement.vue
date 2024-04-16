@@ -3,8 +3,7 @@ import { InfoFilled } from "@element-plus/icons-vue";
 import { onMounted, ref, watch } from "vue";
 import { newUserForm, updateUserInfoForm } from "../api/model";
 import { useAdminStore } from "../store/admin";
-let addVisible = ref(false);
-let updateVisible = ref(false);
+
 let newUserInfo = ref({
   username: "",
   name: "",
@@ -24,6 +23,10 @@ let pageForm = ref({
   pageNumber: 1,
   pageSize: 10,
 });
+
+let addVisible = ref(false);
+let updateVisible = ref(false);
+
 const adminStore = useAdminStore();
 
 // 获取用户列表

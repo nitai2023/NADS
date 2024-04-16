@@ -24,7 +24,7 @@
 #body {
   width: 100%;
   height: 100vh;
-  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-image: linear-gradient(to right, #434343 0%, black 100%);
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -51,7 +51,7 @@ nav p {
   box-sizing: border-box;
   padding: 100px;
   border-radius: 30px;
-  background-color: rgba(90, 90, 90, 0.262);
+  background-color: rgba(90, 90, 90, 0.462);
   transition: all 0.3s;
   &:hover {
     transform: scale(1.01);
@@ -61,13 +61,14 @@ nav p {
 main h1 {
   margin-bottom: 30px;
   font-size: 100px;
-  background-image: linear-gradient(135deg, #3a5eff 0%, #120a1a 100%);
+  background-color: rgb(0, 171, 114);
+
   color: transparent;
   background-clip: text;
 }
 main h2 {
   font-size: 80px;
-  color: black;
+  color: rgb(0, 0, 0);
   margin-bottom: 90px;
 }
 main .action-button {
@@ -78,7 +79,7 @@ main .action-button {
   border-radius: 30px;
   border: none;
   color: #fff;
-  background-image: linear-gradient(135deg, #3a5eff 0%, #4e2b70 100%);
+  background-color: rgb(0, 171, 114);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
     0 4px 6px -2px rgba(0, 0, 0, 0.05);
   transition: all 0.5s;
