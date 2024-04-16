@@ -1,4 +1,5 @@
 import { RouteRecordRaw, createRouter, createWebHashHistory } from "vue-router";
+import AptView from "../view/AptView.vue";
 import AssetQuery from "../view/AssetQuery.vue";
 import HomeView from "../view/HomeView.vue";
 import LoginView from "../view/LoginView.vue";
@@ -8,6 +9,7 @@ import TaskManagementView from "../view/TaskManagementView.vue";
 import UserManagement from "../view/UserManagement.vue";
 import VulnerabilityQuery from "../view/VulnerabilityQuery.vue";
 import DashBoardView from "../view/dashboard/DashBoardView.vue";
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -33,6 +35,7 @@ const routes: Array<RouteRecordRaw> = [
       { path: "/dashboard/vulnerability", component: VulnerabilityQuery },
       { path: "/dashboard/usermanagement", component: UserManagement },
       { path: "/dashboard/taskmanagement", component: TaskManagementView },
+      { path: "/dashboard/aptmanagement", component: AptView },
     ],
   },
   {
@@ -46,20 +49,20 @@ const router = createRouter({
   routes,
 });
 
-// router.beforeEach((to, from, next) => {
-//   const token = localStorage.getItem("token");
-//   if (
-//     token ||
-//     to.path === "/login" ||
-//     to.path === "/register" ||
-//     to.path === "/"
-//   ) {
-//     if (to.path === "/login" && token) {
-//       next("/dashboard");
-//     } else next();
-//   } else {
-//     next("/login");
-//   }
-// });
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem("token");
+  if (
+    token ||
+    to.path === "/login" ||
+    to.path === "/register" ||
+    to.path === "/"
+  ) {
+    if (to.path === "/login" && token) {
+      next("/dashboard");
+    } else next();
+  } else {
+    next("/login");
+  }
+});
 
 export default router;

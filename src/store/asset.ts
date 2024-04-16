@@ -14,22 +14,47 @@ import {
 } from "../api/type";
 
 export const useAssetStore = defineStore("asset", () => {
+  // 资产列表查询
   const searchAsset = async (form: pageList) => {
-    const res = await searchAssetAPI(form);
-    return res.data.data;
+    try {
+      const res = await searchAssetAPI(form);
+      return res.data.data;
+    } catch (error) {
+      console.log(error);
+    }
   };
+  // 添加资产
   const addAsset = async (form: newAssetForm) => {
-    await addAssetAPI(form);
+    try {
+      await addAssetAPI(form);
+    } catch (error) {
+      console.log(error);
+    }
   };
+  // 更新资产
   const updateAsset = async (form: updateAssetForm) => {
-    await updateAssetAPI(form);
+    try {
+      await updateAssetAPI(form);
+    } catch (error) {
+      console.log(error);
+    }
   };
+  // 删除资产
   const deleteAsset = async (nodeId: number) => {
-    const res = await deleteAssetAPI(nodeId);
-    return res.data.data;
+    try {
+      const res = await deleteAssetAPI(nodeId);
+      return res.data.data;
+    } catch (error) {
+      console.log(error);
+    }
   };
+  // 添加任务
   const addTask = async (form: newTaskForm) => {
-    await addTaskAPI(form);
+    try {
+      await addTaskAPI(form);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return {
     searchAsset,

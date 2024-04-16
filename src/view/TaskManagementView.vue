@@ -121,8 +121,8 @@ onMounted(async () => {
       v-model:current-page="pageForm.pageNumber"
       :page-count="assetListInfo.pages"
     />
-    <!-- S Component 添加资产 -->
-    <el-dialog v-model="addVisible" title="添加用户" width="500">
+    <!-- S Component 添加任务 -->
+    <el-dialog v-model="addVisible" title="添加任务" width="500">
       <div id="border">
         <el-form
           label-position="top"
@@ -133,25 +133,25 @@ onMounted(async () => {
           class="demo-ruleForm"
         >
           <div class="form-row">
-            <el-form-item label="accountName :">
-              <el-input v-model="newAssetInfo.accountName" />
+            <el-form-item label="name :">
+              <el-input />
             </el-form-item>
           </div>
           <div class="form-row">
-            <el-form-item label="ip :">
-              <el-input v-model="newAssetInfo.ip" />
+            <el-form-item label="startIp :">
+              <el-input />
             </el-form-item>
-            <el-form-item label="nodeName :">
-              <el-input v-model="newAssetInfo.nodeName" />
+            <el-form-item label="endIp :">
+              <el-input />
             </el-form-item>
           </div>
           <div class="form-row">
-            <el-form-item label="sshKey :">
-              <el-input v-model="newAssetInfo.sshKey" />
+            <el-form-item label="startPort :">
+              <el-input />
             </el-form-item>
 
-            <el-form-item label="sshPort :">
-              <el-input v-model="newAssetInfo.sshPort" />
+            <el-form-item label="endPort :">
+              <el-input />
             </el-form-item>
           </div>
           <div class="form-row">
@@ -168,9 +168,9 @@ onMounted(async () => {
         </el-form>
       </div>
     </el-dialog>
-    <!-- E Component 添加资产 -->
+    <!-- E Component 添加任务 -->
 
-    <!-- S Component 修改资产 -->
+    <!-- S Component 修改任务 -->
     <el-dialog v-model="updateVisible" title="修改用户信息" width="500">
       <div id="border">
         <el-form

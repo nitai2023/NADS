@@ -126,10 +126,9 @@ export const searchUserListdAPI = (form: pageList) => {
 export const searchAptAPI = (form: pageList) => {
   return request({
     method: "GET",
-    url: "/apt/list",
+    url: `/apt/list?pageNumber=${form.pageNumber}&pageSize=${form.pageSize}`,
     headers: {
-      pageNumber: form.pageNumber,
-      pageSize: form.pageSize,
+      token: getToken(),
     },
   });
 };
