@@ -134,8 +134,11 @@ const getCaptcha = (username: string) => {
   }
 }
 #border h1 {
-  color: rgb(0, 0, 0);
+  color: white;
   width: 100%;
   text-align: center;
+}
+::v-deep .el-form-item__label {
+  color: white;
 }
 </style>
