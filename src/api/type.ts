@@ -1,5 +1,6 @@
 import request from ".";
 import {
+  QianXinForm,
   forgetPawwsordForm,
   loginForm,
   newAssetForm,
@@ -195,3 +196,15 @@ export const addTaskAPI = (form: newTaskForm) => {
 };
 
 // End 定向资产
+
+// Start 资产测绘
+
+export const getQianXinAPI = (form: QianXinForm) => {
+  return request({
+    method: "POST",
+    url: `/property/qianxin`,
+    data: form,
+  });
+};
+
+// End 资产测绘

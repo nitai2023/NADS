@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { ElMessage } from "element-plus";
 import { ref } from "vue";
 
 import { useUserStore } from "../store/user";
@@ -11,10 +10,6 @@ const userStore = useUserStore();
 // 登出账号
 const logout = async () => {
   await userStore.userLogout();
-  ElMessage({
-    type: "success",
-    message: "账号退出成功",
-  });
 };
 </script>
 

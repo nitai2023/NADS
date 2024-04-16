@@ -25,26 +25,29 @@ request.interceptors.response.use(
     return response;
   },
   function (error) {
+    console.log(error.response.data.msg);
+
     if (error.response && error) {
       switch (error.response.status) {
         case 400:
-          error.message = "错误请求";
+          error.message = error.response.data.msg;
+
           break;
         case 401:
-          error.message = "未授权，请重新登录";
+          error.message = error.response.data.msg;
           break;
         case 403:
-          error.message = "拒绝访问";
+          error.message = error.response.data.msg;
           break;
         case 404:
-          error.message = "请求错误,未找到该资源";
+          error.message = error.response.data.msg;
           window.location.href = "/NotFound";
           break;
         case 405:
-          error.message = "请求方法未允许";
+          error.message = error.response.data.msg;
           break;
         case 408:
-          error.message = "请求超时";
+          error.message = error.response.data.msg;
           break;
         case 500:
           error.message = "服务器端出错";

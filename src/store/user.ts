@@ -30,13 +30,20 @@ export const useUserStore = defineStore("user", () => {
   const userLogin = async (form: loginForm) => {
     try {
       const res = (await userLoginAPI(form)).data;
-      if (res.data) {
+      if (res.data && res.msg == "OK") {
         localStorage.setItem("token", res.data.token);
         router.push("/dashboard");
         setTimeout(() => {
           ElMessage({
             type: "success",
             message: "账号登录成功",
+          });
+        }, 1000);
+      } else if (res.msg != "OK") {
+        setTimeout(() => {
+          ElMessage({
+            type: "error",
+            message: res.msg + `(请检查用户信息和验证码是否正确)`,
           });
         }, 1000);
       }

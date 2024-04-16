@@ -68,3 +68,11 @@ export interface newTaskForm {
   startIp: string;
   startPort: number;
 }
+
+export interface QianXinForm {
+  apiKey: string;
+  isWeb: string;
+  page: string;
+  pageSize: string;
+  querySentence: string;
+}
