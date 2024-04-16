@@ -1,25 +1,12 @@
 <script lang="ts" setup>
 import { ElMessage } from "element-plus";
 import { ref } from "vue";
-import { forgetPawwsordForm } from "../api/model";
 
 import { useUserStore } from "../store/user";
 
 const isCollapse = ref(false);
-const userStore = useUserStore();
-const seakPasswordVisible = ref(false);
-const forgetPawwsordForm = ref({
-  confirmPassword: "",
-  newPassword: "",
-  username: "",
-});
 
-const handleOpen = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath);
-};
-const handleClose = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath);
-};
+const userStore = useUserStore();
 
 // 登出账号
 const logout = async () => {
@@ -29,21 +16,18 @@ const logout = async () => {
     message: "账号退出成功",
   });
 };
-
-// 找回密码
-const forgetPassword = async (forgetPawwsordForm: forgetPawwsordForm) => {
-  await userStore.ForgetPassword(forgetPawwsordForm);
-  ElMessage({
-    type: "success",
-    message: "密码重置成功",
-  });
-  seakPasswordVisible.value = false;
-};
 </script>
 <!-- Menu -->
 <template>
   <div class="menu-container menu">
-    <h2 style="margin: 0; text-align: center; padding: 10p; color: white">
+    <h2
+      style="
+        margin: 0;
+        text-align: center;
+        padding: 20px;
+        color: rgb(0, 171, 114);
+      "
+    >
       菜单栏
     </h2>
     <el-menu
@@ -51,11 +35,9 @@ const forgetPassword = async (forgetPawwsordForm: forgetPawwsordForm) => {
       class="el-menu-vertical-demo"
       style="background-color: transparent"
       :collapse="isCollapse"
-      text-color=" rgb(89, 0, 161)"
+      text-color="rgb(0, 203, 135)"
       active-text-color="rgb(255, 255, 255)"
       :router="true"
-      @open="handleOpen"
-      @close="handleClose"
     >
       <el-menu-item>
         <template #title><h2>菜单栏</h2></template>
@@ -76,69 +58,45 @@ const forgetPassword = async (forgetPawwsordForm: forgetPawwsordForm) => {
         <el-icon><setting /></el-icon>
         <template #title>用户管理</template>
       </el-menu-item>
+      <el-menu-item index="5" route="/dashboard/aptmanagement">
+        <el-icon><setting /></el-icon>
+        <template #title>APT管理</template>
+      </el-menu-item>
     </el-menu>
-    <el-popconfirm
-      width="220"
-      confirm-button-text="OK"
-      cancel-button-text="No, Thanks"
-      :icon="InfoFilled"
-      icon-color="#626AEF"
-      title="Are you sure to logout?"
-      @confirm="() => logout()"
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+      "
     >
-      <template #reference>
-        <el-button type="danger" text bg>登出账号</el-button>
-      </template>
-    </el-popconfirm>
-    <el-button type="primary" @click="seakPasswordVisible = true" text bg
-      >忘记密码</el-button
-    >
-  </div>
-  <el-dialog v-model="seakPasswordVisible" title="找回密码" width="500">
-    <div id="border">
-      <el-form
-        label-position="top"
-        style="max-width: 600px"
-        :model="forgetPawwsordForm"
-        status-icon
-        label-width="auto"
-        class="demo-ruleForm"
+      <el-popconfirm
+        width="220"
+        confirm-button-text="OK"
+        cancel-button-text="No, Thanks"
+        :icon="InfoFilled"
+        icon-color="#626AEF"
+        title="Are you sure to logout?"
+        @confirm="() => logout()"
       >
-        <div class="form-row">
-          <el-form-item label="用户名 :">
-            <el-input v-model="forgetPawwsordForm.username" />
-          </el-form-item>
-          <el-form-item label="新密码 :">
-            <el-input v-model="forgetPawwsordForm.newPassword" />
-          </el-form-item>
-        </div>
-        <div class="form-row">
-          <el-form-item label="确认密码:">
-            <el-input v-model="forgetPawwsordForm.confirmPassword" />
-          </el-form-item>
-        </div>
-        <div class="form-row">
-          <el-form-item>
-            <el-button
-              type="primary"
-              class="item"
-              style="width: 130px"
-              @click="forgetPassword(forgetPawwsordForm)"
-              >修改</el-button
-            >
-          </el-form-item>
-        </div>
-      </el-form>
+        <template #reference>
+          <el-button color="rgb(0, 203, 135)" :dark="isDark"
+            >登出账号</el-button
+          >
+        </template>
+      </el-popconfirm>
     </div>
-  </el-dialog>
+  </div>
 </template>
 
 <style>
 .menu {
   height: 100vh;
-  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
+  background-color: rgb(31, 31, 31);
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .menu-container {
   .menu-collapse {
@@ -151,7 +109,7 @@ const forgetPassword = async (forgetPawwsordForm: forgetPawwsordForm) => {
     --text-color: rgb(166, 166, 166);
     h2 {
       width: 100%;
-      color: rgb(255, 255, 255);
+      color: rgb(0, 203, 135);
       text-align: center;
     }
     .el-menu-item {

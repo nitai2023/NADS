@@ -3,20 +3,30 @@ import { ElMessage } from "element-plus";
 import { ref } from "vue";
 import { useUserStore } from "../store/user";
 
+let captchaImg = ref("");
 let loginForm = ref({
   username: "",
   password: "",
   captcha: "",
 });
+const forgetPawwsordForm = ref({
+  confirmPassword: "",
+  newPassword: "",
+  username: "",
+});
+
+const seakPasswordVisible = ref(false);
 let imgVisible = ref(false);
-let captchaImg = ref(""); // 创建新的响应式引用
+
 const userStore = useUserStore();
+
+// 获取验证码
 const getCaptcha = (username: string) => {
   console.log(username);
   if (username === "") {
     ElMessage({
       type: "info",
-      message: "请先填写账号信息",
+      message: "请先填写用户名信息",
     });
   } else {
     userStore.getCaptcha(username).then((response) => {
@@ -27,6 +37,28 @@ const getCaptcha = (username: string) => {
     });
     imgVisible.value = true;
   }
+};
+
+// 登录
+const login = async () => {
+  if (
+    loginForm.value.username === "" ||
+    loginForm.value.password === "" ||
+    loginForm.value.captcha === ""
+  ) {
+    ElMessage({
+      type: "info",
+      message: "请先完整填写信息",
+    });
+  } else {
+    userStore.userLogin(loginForm.value);
+  }
+};
+
+// 找回密码
+const forgetPassword = async (forgetPawwsordForm: forgetPawwsordForm) => {
+  await userStore.ForgetPassword(forgetPawwsordForm);
+  seakPasswordVisible.value = false;
 };
 </script>
 <!-- Login View -->
@@ -92,27 +124,69 @@ const getCaptcha = (username: string) => {
           </button>
         </el-form-item>
         <el-form-item id="items">
-          <button style="padding: 10px" @click="userStore.userLogin(loginForm)">
-            登录
-          </button>
+          <el-button @click="login">登录账号</el-button>
+          <el-button
+            color="#626aef"
+            :dark="isDark"
+            style="margin-left: 10px"
+            @click="seakPasswordVisible = true"
+            >忘记密码</el-button
+          >
         </el-form-item>
       </el-form>
     </div>
   </div>
+  <el-dialog v-model="seakPasswordVisible" title="找回密码" width="500">
+    <div>
+      <el-form
+        label-position="top"
+        style="max-width: 600px; border-radius: 15px"
+        :model="forgetPawwsordForm"
+        status-icon
+        label-width="auto"
+        class="demo-ruleForm"
+      >
+        <div class="form-row">
+          <el-form-item label="用户名 :">
+            <el-input v-model="forgetPawwsordForm.username" />
+          </el-form-item>
+          <el-form-item label="新密码 :">
+            <el-input v-model="forgetPawwsordForm.newPassword" />
+          </el-form-item>
+        </div>
+        <div class="form-row">
+          <el-form-item label="确认密码:">
+            <el-input v-model="forgetPawwsordForm.confirmPassword" />
+          </el-form-item>
+        </div>
+        <div class="form-row">
+          <el-form-item>
+            <el-button
+              type="primary"
+              class="item"
+              style="width: 130px; background-color: rgb(0, 171, 114)"
+              @click="forgetPassword(forgetPawwsordForm)"
+              >修改</el-button
+            >
+          </el-form-item>
+        </div>
+      </el-form>
+    </div>
+  </el-dialog>
 </template>
 
 <style scoped lang="scss">
 #body {
   width: 100vw;
   height: 100vh;
-  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-image: linear-gradient(to right, #434343 0%, black 100%);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 #border {
   border-radius: 50px;
-  background-color: #3434343e;
+  background-color: rgba(90, 90, 90, 0.462);
   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
     rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
   padding: 50px;
@@ -125,7 +199,8 @@ const getCaptcha = (username: string) => {
     color: rgb(255, 255, 255);
     border: 0px;
     border-radius: 5px;
-    background-image: linear-gradient(to top, #6a85b6 0%, #bac8e0 100%);
+    background-color: rgb(0, 171, 114);
+
     transition: all 0.5s;
     &:hover {
       transform: scale(1.05);
@@ -134,7 +209,7 @@ const getCaptcha = (username: string) => {
   }
 }
 #border h1 {
-  color: rgb(0, 0, 0);
+  color: rgb(0, 171, 114);
   width: 100%;
   text-align: center;
 }
