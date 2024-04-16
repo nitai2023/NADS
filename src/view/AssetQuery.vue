@@ -73,6 +73,7 @@ onMounted(async () => {
   await searchAssetList(pageForm.value);
 });
 </script>
+<!-- Asset Query -->
 <template>
   <div>
     <el-table row-key="date" :data="assetListInfo.list" style="width: 100%">
@@ -84,32 +85,14 @@ onMounted(async () => {
       <el-table-column prop="sshPort" label="sshPort" />
 
       <el-table-column>
-        <template #header>
-          <el-button size="small" type="success" @click="addVisible = true"
-            >添加</el-button
-          >
-        </template>
-
+        <template #header> 操作 </template>
         <template #default="scope">
           <el-button
             size="small"
             type="primary"
             @click="getAssetInfo(scope.row)"
-            >修改</el-button
+            >详细信息</el-button
           >
-          <el-popconfirm
-            width="220"
-            confirm-button-text="OK"
-            cancel-button-text="No, Thanks"
-            :icon="InfoFilled"
-            icon-color="#626AEF"
-            title="Are you sure to delete this?"
-            @confirm="() => deleteAsset(scope.row.id)"
-          >
-            <template #reference>
-              <el-button size="small" type="danger">删除</el-button>
-            </template>
-          </el-popconfirm>
         </template>
       </el-table-column>
     </el-table>

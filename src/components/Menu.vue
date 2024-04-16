@@ -12,7 +12,7 @@ const logout = async () => {
   await userStore.userLogout();
 };
 </script>
-
+<!-- Menu -->
 <template>
   <div class="menu-container menu">
     <h2
@@ -34,20 +34,23 @@ const logout = async () => {
       active-text-color="rgb(255, 255, 255)"
       :router="true"
     >
+      <el-menu-item>
+        <template #title><h2>菜单栏</h2></template>
+      </el-menu-item>
       <el-menu-item index="1" route="/dashboard/taskmanagement">
         <el-icon><Menu /></el-icon>
         <template #title>扫描任务管理</template>
       </el-menu-item>
       <el-menu-item index="2" route="/dashboard/assetquery">
-        <el-icon><Menu /></el-icon>
+        <el-icon><Search /></el-icon>
         <template #title>资产查询</template>
       </el-menu-item>
       <el-menu-item index="3" route="/dashboard/vulnerability">
-        <el-icon><document /></el-icon>
+        <el-icon><Search /></el-icon>
         <template #title>漏洞查询</template>
       </el-menu-item>
       <el-menu-item index="4" route="/dashboard/usermanagement">
-        <el-icon><setting /></el-icon>
+        <el-icon><User /></el-icon>
         <template #title>用户管理</template>
       </el-menu-item>
       <el-menu-item index="5" route="/dashboard/aptmanagement">
@@ -103,6 +106,9 @@ const logout = async () => {
       width: 100%;
       color: rgb(0, 203, 135);
       text-align: center;
+    }
+    .el-menu-item {
+      display: flex;
     }
   }
 }

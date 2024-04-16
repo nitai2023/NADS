@@ -213,4 +213,7 @@ const forgetPassword = async (forgetPawwsordForm: forgetPawwsordForm) => {
   width: 100%;
   text-align: center;
 }
+::v-deep .el-form-item__label {
+  color: white;
+}
 </style>

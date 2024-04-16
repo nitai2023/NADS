@@ -72,40 +72,27 @@ onMounted(async () => {
   await searchUserListd(pageForm);
 });
 </script>
+<!-- UserManangement -->
 <template>
   <div>
-    <el-table row-key="date" :data="userListInfo.list" style="width: 100%">
-      <el-table-column prop="id" label="id" width="180" />
-      <el-table-column prop="username" label="username" width="180" />
-      <el-table-column prop="isAdmin" label="IsAdmin" width="180" />
-      <el-table-column prop="name" label="Name" width="180" />
-      <el-table-column prop="characterName" label="CharacterName" />
+    <el-table row-key="date" :data="tableData" style="width: 100%">
+      <el-table-column prop="id" label="id" width="180" #empty />
+      <el-table-column prop="username" label="username" width="180" #empty />
+      <el-table-column prop="isAdmin" label="IsAdmin" width="180" #empty />
+      <el-table-column prop="name" label="Name" width="180" #empty />
+      <el-table-column prop="characterName" label="CharacterName" #empty />
+      <el-table-column prop="characterName" label="CharacterName" #empty />
       <el-table-column>
         <template #header>
-          <el-button size="small" type="success" @click="addVisible = true"
-            >添加</el-button
+          <el-button size="small" type="success" @click="dialogVisible = true"
+            >Add</el-button
           >
         </template>
-
-        <template #default="scope">
-          <el-button size="small" type="primary" @click="getUserInfo(scope.row)"
-            >修改</el-button
-          >
-          <el-popconfirm
-            width="220"
-            confirm-button-text="OK"
-            cancel-button-text="No, Thanks"
-            :icon="InfoFilled"
-            icon-color="#626AEF"
-            title="Are you sure to delete this?"
-            @confirm="() => deleteUser(scope.row.id)"
-          >
-            <template #reference>
-              <el-button size="small" type="danger">删除</el-button>
-            </template>
-          </el-popconfirm>
-        </template>
-      </el-table-column>
+        <template #default>
+          <el-button size="small" type="primary">Edit</el-button>
+          <el-button size="small" type="danger">Delete</el-button>
+        </template></el-table-column
+      >
     </el-table>
     <el-pagination
       small
@@ -114,8 +101,7 @@ onMounted(async () => {
       v-model:current-page="pageForm.pageNumber"
       :page-count="userListInfo.pages"
     />
-    <!-- S Component 添加用户视图 -->
-    <el-dialog v-model="addVisible" title="添加用户" width="500">
+    <el-dialog v-model="dialogVisible" title="添加用户" width="500">
       <div id="border">
         <el-form
           label-position="top"
@@ -161,52 +147,6 @@ onMounted(async () => {
         </el-form>
       </div>
     </el-dialog>
-    <!-- E Component 添加用户视图 -->
-
-    <!-- S Component 修改用户信息视图 -->
-    <el-dialog v-model="updateVisible" title="修改用户信息" width="500">
-      <div id="border">
-        <el-form
-          label-position="top"
-          style="max-width: 600px"
-          :model="UserInfo"
-          status-icon
-          label-width="auto"
-          class="demo-ruleForm"
-        >
-          <div class="form-row">
-            <el-form-item label="管理员">
-              <el-switch v-model="UserInfo.isAdmin" />
-            </el-form-item>
-          </div>
-          <div class="form-row">
-            <el-form-item label="用户名 :">
-              <el-input v-model="UserInfo.username" />
-            </el-form-item>
-            <el-form-item label="姓名 :">
-              <el-input v-model="UserInfo.name" />
-            </el-form-item>
-          </div>
-          <div class="form-row">
-            <el-form-item label="角色名 :">
-              <el-input v-model="UserInfo.characterName" />
-            </el-form-item>
-          </div>
-          <div class="form-row">
-            <el-form-item>
-              <el-button
-                type="primary"
-                class="item"
-                style="width: 130px"
-                @click="updateUserInfo(UserInfo)"
-                >修改</el-button
-              >
-            </el-form-item>
-          </div>
-        </el-form>
-      </div>
-    </el-dialog>
-    <!-- E Component 修改用户信息视图 -->
   </div>
 </template>
 <style>
