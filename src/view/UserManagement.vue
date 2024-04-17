@@ -77,10 +77,10 @@ onMounted(async () => {
   <div>
     <el-table row-key="date" :data="userListInfo.list" style="width: 100%">
       <el-table-column prop="id" label="id" width="180" />
-      <el-table-column prop="username" label="username" width="180" />
       <el-table-column prop="name" label="name" width="180" />
+      <el-table-column prop="username" label="username" width="180" />
       <el-table-column prop="characterName" label="characterName" width="180" />
-      <el-table-column prop="isAdmin" label="sshKey" />
+      <el-table-column prop="isAdmin" label="isAdmin" />
       <el-table-column>
         <template #header>
           <el-button
