@@ -32,6 +32,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/dashboard",
     name: "dashboard",
     component: DashBoardView,
+    redirect: "/dashboard/assetquery",
     children: [
       { path: "/dashboard/assetquery", component: AssetQuery },
       { path: "/dashboard/vulnerability", component: VulnerabilityQuery },

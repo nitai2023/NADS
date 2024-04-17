@@ -119,7 +119,7 @@ onMounted(async () => {
       :page-count="userListInfo.pages"
     />
     <!-- S Component 添加任务 -->
-    <el-dialog v-model="addVisible" title="添加任务" width="500">
+    <el-dialog v-model="addVisible" title="添加用户" width="500">
       <div id="border">
         <el-form
           label-position="top"
@@ -130,25 +130,26 @@ onMounted(async () => {
           class="demo-ruleForm"
         >
           <div class="form-row">
+            <el-form-item label="isAdmin :">
+              <el-switch v-model="newUserInfo.isAdmin" size="large" />
+            </el-form-item>
+          </div>
+          <div class="form-row">
             <el-form-item label="name :">
-              <el-input />
+              <el-input v-model="newUserInfo.name" />
+            </el-form-item>
+            <el-form-item label="characterName :">
+              <el-input v-model="newUserInfo.characterName" />
             </el-form-item>
           </div>
           <div class="form-row">
-            <el-form-item label="startIp :">
-              <el-input />
-            </el-form-item>
-            <el-form-item label="endIp :">
-              <el-input />
+            <el-form-item label="username :">
+              <el-input v-model="newUserInfo.username" />
             </el-form-item>
           </div>
           <div class="form-row">
-            <el-form-item label="startPort :">
-              <el-input />
-            </el-form-item>
-
-            <el-form-item label="endPort :">
-              <el-input />
+            <el-form-item label="password :">
+              <el-input v-model="newUserInfo.password" />
             </el-form-item>
           </div>
           <div class="form-row">
@@ -158,7 +159,7 @@ onMounted(async () => {
                 class="item"
                 style="width: 130px"
                 @click="addUser(newUserInfo)"
-                >添加</el-button
+                >增加</el-button
               >
             </el-form-item>
           </div>
