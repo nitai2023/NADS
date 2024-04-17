@@ -3,13 +3,17 @@ import {
   newAssetForm,
   newTaskForm,
   pageList,
+  scanPortForm,
   updateAssetForm,
 } from "../api/model";
 import {
   addAssetAPI,
   addTaskAPI,
   deleteAssetAPI,
+  scanPortAPI,
+  scanVulnAPI,
   searchAssetAPI,
+  searchTaskAPI,
   updateAssetAPI,
 } from "../api/type";
 
@@ -56,11 +60,39 @@ export const useAssetStore = defineStore("asset", () => {
       console.log(error);
     }
   };
+  // 获取任务
+  const searchTask = async (form: pageList) => {
+    try {
+      const res = await searchTaskAPI(form);
+      return res.data.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // 端口扫描
+  const scanPort = async (form: scanPortForm) => {
+    try {
+      const res = await scanPortAPI(form);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // 漏洞扫描
+  const scanVuln = async (ip: string) => {
+    try {
+      const res = await scanVulnAPI(ip);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return {
     searchAsset,
     addAsset,
     updateAsset,
     deleteAsset,
     addTask,
+    searchTask,
+    scanPort,
+    scanVuln,
   };
 });

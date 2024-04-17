@@ -7,6 +7,7 @@ import {
   newTaskForm,
   newUserForm,
   pageList,
+  scanPortForm,
   updateAssetForm,
   updatePawwsordForm,
   updateUserInfoForm,
@@ -183,6 +184,17 @@ export const deleteAssetAPI = (nodeId: number) => {
   });
 };
 
+// 获取任务
+export const searchTaskAPI = (form: pageList) => {
+  return request({
+    method: "GET",
+    url: `/property/task?pageNumber=${form.pageNumber}&pageSize=${form.pageSize}`,
+    headers: {
+      token: getToken(),
+    },
+  });
+};
+
 // 创建任务
 export const addTaskAPI = (form: newTaskForm) => {
   return request({
@@ -192,6 +204,35 @@ export const addTaskAPI = (form: newTaskForm) => {
       token: getToken(),
     },
     data: form,
+  });
+};
+
+// 删除任务
+export const deleteTaskAPI = (taskId: number) => {
+  return request({
+    method: "DELETE",
+    url: `/property/task?taskId=${taskId}`,
+    headers: {
+      token: getToken(),
+    },
+  });
+};
+
+// 端口扫描
+export const scanPortAPI = (form: scanPortForm) => {
+  return request({
+    method: "POST",
+    url: `/property/portScan`,
+    data: form,
+  });
+};
+
+// 漏洞扫描
+export const scanVulnAPI = (ip: string) => {
+  return request({
+    method: "POST",
+    url: `/property/vulnScan`,
+    data: { ip },
   });
 };
 

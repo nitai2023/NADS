@@ -62,11 +62,13 @@ export interface updateAssetForm {
 }
 
 export interface newTaskForm {
-  endIp: string;
-  endPort: number;
+  endIp?: string;
+  endPort?: number;
   name: string;
-  startIp: string;
-  startPort: number;
+  startIp?: string;
+  startPort?: number;
+  type: string;
+  vulnScanIp?: string;
 }
 
 export interface QianXinForm {
@@ -75,4 +77,11 @@ export interface QianXinForm {
   page: string;
   pageSize: string;
   querySentence: string;
+}
+
+export interface scanPortForm {
+  endIp: string;
+  endPort: string;
+  startIp: string;
+  startPort: string;
 }
