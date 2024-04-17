@@ -1,7 +1,6 @@
 import ElMessage from "element-plus";
 import { RouteRecordRaw, createRouter, createWebHashHistory } from "vue-router";
 import AptView from "../view/AptView.vue";
-import AssetQuery from "../view/AssetQuery.vue";
 import HomeView from "../view/HomeView.vue";
 import LoginView from "../view/LoginView.vue";
 import NotFoundViewVue from "../view/NotFoundView.vue";
@@ -12,6 +11,7 @@ import UserManagement from "../view/UserManagement.vue";
 import VulnerabilityQuery from "../view/VulnerabilityQuery.vue";
 import DashBoardView from "../view/dashboard/DashBoardView.vue";
 import GoalDetailView from "../view/TargetedAssetView/GoalDetailView.vue"
+import AssetMapView from "../view/AssetMapView.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -32,12 +32,12 @@ const routes: Array<RouteRecordRaw> = [
     path: "/dashboard",
     name: "dashboard",
     component: DashBoardView,
-    redirect: "/dashboard/assetquery",
+    redirect: "/dashboard/assetmap",
     children: [
-      { path: "/dashboard/assetquery", component: AssetQuery },
+      { path: "/dashboard/assetmap", component: AssetMapView },
       { path: "/dashboard/vulnerability", component: VulnerabilityQuery },
       { path: "/dashboard/usermanagement", component: UserManagement },
-      { path: "/dashboard/targetedasset",children:[{path:"/dashboard/targetedasset/createtask",component:CreateTaskView},{path:"/dashboard/targetedasset/nodemanage",component:NodeManageView}] },
+      { path: "/dashboard/targetedasset",children:[{path:"/dashboard/targetedasset/createtask",component:CreateTaskView},{path:"/dashboard/targetedasset/nodemanage",component:NodeManageView},{path:"/dashboard/targetedasset/goaldetail",component:GoalDetailView}] },
       { path: "/dashboard/aptmanagement", component: AptView },
     ],
   },

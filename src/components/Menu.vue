@@ -49,7 +49,7 @@ const logout = async () => {
           >目标详情
         </el-menu-item>
       </el-sub-menu>
-      <el-menu-item index="2" route="/dashboard/assetquery">
+      <el-menu-item index="2" route="/dashboard/assetmap">
         <el-icon><Search /></el-icon>
         <template #title>资产查询</template>
       </el-menu-item>
