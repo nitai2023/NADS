@@ -34,10 +34,19 @@ const logout = async () => {
       active-text-color="rgb(255, 255, 255)"
       :router="true"
     >
-      <el-menu-item index="1" route="/dashboard/taskmanagement">
-        <el-icon><Menu /></el-icon>
-        <template #title>扫描任务管理</template>
-      </el-menu-item>
+      <el-sub-menu index="1">
+        <template #title>
+          <el-icon><location /></el-icon>
+          <span>定向资产</span>
+        </template>
+        <el-menu-item index="1-1" route="/dashboard/targetedasset/nodemanage">
+          节点管理</el-menu-item
+        >
+        <el-menu-item index="1-2" route="/dashboard/targetedasset/createtask"
+          >创建任务</el-menu-item
+        >
+        <el-menu-item index="1-3">目标详情 </el-menu-item>
+      </el-sub-menu>
       <el-menu-item index="2" route="/dashboard/assetquery">
         <el-icon><Search /></el-icon>
         <template #title>资产查询</template>
@@ -88,7 +97,10 @@ const logout = async () => {
   background-color: rgb(31, 31, 31);
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(45, 45, 45, 0.35) 0px 5px 15px;
+  .el-menu--inline {
+    background-color: rgb(53, 52, 52);
+  }
 }
 .menu-container {
   .menu-collapse {

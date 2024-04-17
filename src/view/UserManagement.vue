@@ -83,7 +83,10 @@ onMounted(async () => {
       <el-table-column prop="isAdmin" label="sshKey" />
       <el-table-column>
         <template #header>
-          <el-button size="small" type="success" @click="addVisible = true"
+          <el-button
+            size="small"
+            class="el-button--success"
+            @click="addVisible = true"
             >添加</el-button
           >
         </template>
@@ -240,5 +243,9 @@ form {
 }
 .el-form-item:last-child {
   margin-right: 0;
+}
+.el-button--success {
+  background-color: rgb(0, 203, 135);
+  color: black;
 }
 </style>
