@@ -32,6 +32,9 @@ export const useUserStore = defineStore("user", () => {
       const res = (await userLoginAPI(form)).data;
       if (res.data && res.msg == "OK") {
         localStorage.setItem("token", res.data.token);
+        const dueTime = (Date.now() + 3 * 60 * 60 * 1000).toString();
+        localStorage.setItem("dueTime", dueTime);
+
         router.push("/dashboard");
         setTimeout(() => {
           ElMessage({
@@ -56,6 +59,7 @@ export const useUserStore = defineStore("user", () => {
     try {
       await userLogoutAPI();
       localStorage.removeItem("token");
+      localStorage.removeItem("dueTime");
       router.push("/login");
       setTimeout(() => {
         ElMessage({
