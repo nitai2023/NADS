@@ -45,7 +45,9 @@ const logout = async () => {
         <el-menu-item index="1-2" route="/dashboard/targetedasset/createtask"
           >创建任务</el-menu-item
         >
-        <el-menu-item index="1-3">目标详情 </el-menu-item>
+        <el-menu-item index="1-3" route="/dashboard/targetedasset/goaldetail"
+          >目标详情
+        </el-menu-item>
       </el-sub-menu>
       <el-menu-item index="2" route="/dashboard/assetquery">
         <el-icon><Search /></el-icon>

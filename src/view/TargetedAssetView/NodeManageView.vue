@@ -44,7 +44,7 @@
   </div>
   <!--E 结果页面 -->
 </template>
-<style lang="scss">
+<style scoped lang="scss">
 #search {
   width: 100%;
   height: 100%;

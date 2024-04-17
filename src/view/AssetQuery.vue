@@ -223,7 +223,7 @@ onMounted(async () => {
     <!-- E Component 修改资产 -->
   </div>
 </template>
-<style>
+<style scoped lang="scss">
 .el-pagination {
   display: flex;
   justify-content: center;

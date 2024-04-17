@@ -15,7 +15,7 @@
     </el-form>
   </div>
 </template>
-<style>
+<style scoped lang="scss">
 #box {
   width: 100%;
   height: auto;

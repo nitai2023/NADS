@@ -10,7 +10,7 @@ import VulnerabilityQuery from "../view/VulnerabilityQuery.vue";
 import DashBoardView from "../view/dashboard/DashBoardView.vue";
 import CreateTaskView from "../view/TargetedAssetView/CreateTaskView.vue";
 import NodeManageView from "../view/TargetedAssetView/NodeManageView.vue";
-
+import GoalDetailView from "../view/TargetedAssetView/GoalDetailView.vue"
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -35,7 +35,7 @@ const routes: Array<RouteRecordRaw> = [
       { path: "/dashboard/assetquery", component: AssetQuery },
       { path: "/dashboard/vulnerability", component: VulnerabilityQuery },
       { path: "/dashboard/usermanagement", component: UserManagement },
-      { path: "/dashboard/targetedasset",children:[{path:"/dashboard/targetedasset/createtask",component:CreateTaskView},{path:"/dashboard/targetedasset/nodemanage",component:NodeManageView}] },
+      { path: "/dashboard/targetedasset",children:[{path:"/dashboard/targetedasset/createtask",component:CreateTaskView},{path:"/dashboard/targetedasset/nodemanage",component:NodeManageView},{path:"/dashboard/targetedasset/goaldetail",component:GoalDetailView}] },
       { path: "/dashboard/aptmanagement", component: AptView },
     ],
   },
