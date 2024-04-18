@@ -1,4 +1,6 @@
+import { ElMessage } from "element-plus";
 import { defineStore } from "pinia";
+
 import {
   newAssetForm,
   newTaskForm,
@@ -10,6 +12,7 @@ import {
   addAssetAPI,
   addTaskAPI,
   deleteAssetAPI,
+  deleteTaskAPI,
   scanPortAPI,
   scanVulnAPI,
   searchAssetAPI,
@@ -55,7 +58,14 @@ export const useAssetStore = defineStore("asset", () => {
   // 添加任务
   const addTask = async (form: newTaskForm) => {
     try {
-      await addTaskAPI(form);
+      const res = await addTaskAPI(form);
+      if (res.data.msg == null)
+        setTimeout(() => {
+          ElMessage({
+            type: "success",
+            message: "任务创建成功",
+          });
+        }, 500);
     } catch (error) {
       console.log(error);
     }
@@ -65,6 +75,14 @@ export const useAssetStore = defineStore("asset", () => {
     try {
       const res = await searchTaskAPI(form);
       return res.data.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // 删除任务
+  const deleteTask = async (taskId: number) => {
+    try {
+      const res = await deleteTaskAPI(taskId);
     } catch (error) {
       console.log(error);
     }
@@ -93,6 +111,7 @@ export const useAssetStore = defineStore("asset", () => {
     addTask,
     searchTask,
     scanPort,
+    deleteTask,
     scanVuln,
   };
 });

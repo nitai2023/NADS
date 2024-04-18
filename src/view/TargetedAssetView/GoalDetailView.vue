@@ -2,6 +2,10 @@
 <!-- 目标详情 -->
 <template>
   <h1>目标详情</h1>
+  <div class="DetailedSearch">
+    <el-input placeholder="请输入要执行的任务id"></el-input
+    ><el-button class="el-button--add">执行</el-button>
+  </div>
   <el-collapse>
     <el-collapse-item name="1">
       <template #title>
@@ -51,6 +55,17 @@ h1 {
     h2 {
       color: rgb(0, 171, 114);
     }
+  }
+}
+.DetailedSearch {
+  display: inline-block;
+  margin-left: 1%;
+  .el-input {
+    width: 200px;
+  }
+  .el-button--add {
+    background-color: rgb(0, 203, 135);
+    color: black;
   }
 }
 </style>

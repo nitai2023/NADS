@@ -61,16 +61,6 @@ export interface updateAssetForm {
   sshPort?: number;
 }
 
-export interface newTaskForm {
-  endIp?: string;
-  endPort?: number;
-  name: string;
-  startIp?: string;
-  startPort?: number;
-  type: string;
-  vulnScanIp?: string;
-}
-
 export interface QianXinForm {
   apiKey: string;
   isWeb: string;
@@ -84,4 +74,20 @@ export interface scanPortForm {
   endPort: string;
   startIp: string;
   startPort: string;
+}
+export interface newNodeForm {
+  accountName: string;
+  ip: string;
+  nodeName: string;
+  sshKey: number;
+  sshPort: number;
+}
+
+export interface newTaskForm {
+  endIp?: string;
+  endPort?: number;
+  name: string;
+  startIp?: string;
+  startPort?: number;
+  type: string;
 }
