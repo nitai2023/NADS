@@ -6,11 +6,17 @@
       <el-form-item label=" 任务名称  :" width="400">
         <el-input />
       </el-form-item>
-      <el-form-item label="自定义目标 :" width="400">
-        <el-input :rows="3" type="textarea" />
+      <el-form-item label="起始IP :">
+        <el-input width="400" />
       </el-form-item>
-      <el-form-item label="自定义端口 :">
-        <el-input :rows="4" type="textarea" width="400" />
+      <el-form-item label="结束IP :">
+        <el-input width="400" />
+      </el-form-item>
+      <el-form-item label="起始端口 :">
+        <el-input width="400" />
+      </el-form-item>
+      <el-form-item label="结束端口 :">
+        <el-input width="400" />
       </el-form-item>
       <el-form-item>
         <el-button class="el-button--success">提交</el-button
@@ -19,21 +25,24 @@
     </el-form>
   </div>
 </template>
-<style>
+<style scoped lang="scss">
 #box {
   width: 100%;
   height: auto;
   h1 {
-    padding-left: 30px;
+    text-align: center;
   }
   form {
-    padding-left: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
     .el-input {
-      width: 800px;
+      width: 600px;
       margin-bottom: 20px;
     }
     .el-textarea__inner {
-      width: 800px;
+      width: 600px;
       margin-bottom: 20px;
     }
     .el-button--success {
