@@ -10,8 +10,7 @@ let newTask = ref({
   name: null,
   startIp: null,
   endIp: null,
-  startPort: null,
-  endPort: null,
+
   type: "portscan",
 });
 let pageForm = ref({
@@ -28,6 +27,11 @@ const addTask = async (taskInfo: newTaskForm) => {
 const searchTaskList = async (pageForm: any) => {
   TaskListInfo.value = await assetStore.searchTask(pageForm.value);
   console.log(TaskListInfo.value);
+};
+
+// 任务详情
+const getTaskInfo = async (taskId: number) => {
+  await assetStore.getTaskInfo(taskId);
 };
 // 监听页数变化
 watch(
@@ -75,16 +79,19 @@ onMounted(async () => {
       <el-form-item label=" 任务名称  :" width="400">
         <el-input v-model="newTask.name" />
       </el-form-item>
-      <el-form-item label="起始IP :">
+      <el-form-item v-if="newTask.type !== 'portscan'" label=" IP:" width="400">
+        <el-input v-model="newTask.vulnScanIp" />
+      </el-form-item>
+      <el-form-item v-if="newTask.type == 'portscan'" label="起始IP :">
         <el-input width="400" v-model="newTask.startIp" />
       </el-form-item>
-      <el-form-item label="结束IP :">
+      <el-form-item v-if="newTask.type == 'portscan'" label="结束IP :">
         <el-input width="400" v-model="newTask.endIp" />
       </el-form-item>
-      <el-form-item label="起始端口 :">
+      <el-form-item v-if="newTask.type == 'portscan'" label="起始端口 :">
         <el-input width="400" v-model="newTask.startPort" />
       </el-form-item>
-      <el-form-item label="结束端口 :">
+      <el-form-item v-if="newTask.type == 'portscan'" label="结束端口 :">
         <el-input width="400" v-model="newTask.endPort" />
       </el-form-item>
 
@@ -124,7 +131,9 @@ onMounted(async () => {
           border
         >
           <template #extra>
-            <el-button size="small" type="danger">详情</el-button>
+            <el-button size="small" type="danger" @click="getTaskInfo(item.id)"
+              >详情</el-button
+            >
             <el-popconfirm
               width="220"
               confirm-button-text="OK"

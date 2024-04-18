@@ -1,13 +1,12 @@
 import request from ".";
 import {
-  QianXinForm,
+  AssetMappingForm,
   forgetPawwsordForm,
   loginForm,
   newAssetForm,
   newTaskForm,
   newUserForm,
   pageList,
-  scanPortForm,
   updateAssetForm,
   updatePawwsordForm,
   updateUserInfoForm,
@@ -194,6 +193,16 @@ export const searchTaskAPI = (form: pageList) => {
     },
   });
 };
+// 获取任务
+export const getTaskInfoAPI = (taskId: number) => {
+  return request({
+    method: "GET",
+    url: `/property/task/detail?taskId=${taskId}`,
+    headers: {
+      token: getToken(),
+    },
+  });
+};
 
 // 创建任务
 export const addTaskAPI = (form: newTaskForm) => {
@@ -219,20 +228,27 @@ export const deleteTaskAPI = (taskId: number) => {
 };
 
 // 端口扫描
-export const scanPortAPI = (form: scanPortForm) => {
+export const scanPortAPI = (taskId: number) => {
   return request({
     method: "POST",
-    url: `/property/portScan`,
-    data: form,
+    url: `/property/portScan?taskId=${taskId}`,
+    headers: {
+      token: getToken(),
+    },
+    data: {
+      taskId,
+    },
   });
 };
 
 // 漏洞扫描
-export const scanVulnAPI = (ip: string) => {
+export const scanVulnAPI = (taskId: number) => {
   return request({
     method: "POST",
-    url: `/property/vulnScan`,
-    data: { ip },
+    url: `/property/vulnScan?taskId=${taskId}`,
+    headers: {
+      token: getToken(),
+    },
   });
 };
 
@@ -240,11 +256,23 @@ export const scanVulnAPI = (ip: string) => {
 
 // Start 资产测绘
 
-export const getQianXinAPI = (form: QianXinForm) => {
+// 获取资产测绘
+export const getAssetMappingAPI = (form: AssetMappingForm) => {
   return request({
     method: "POST",
     url: `/property/qianxin`,
     data: form,
+  });
+};
+
+// 获取资产测绘信息
+export const getAssetMappingInfoAPI = (form: pageList) => {
+  return request({
+    method: "GET",
+    url: `/property/mapping?pageNumber=${form.pageNumber}&pageSize=${form.pageSize}`,
+    headers: {
+      token: getToken(),
+    },
   });
 };
 

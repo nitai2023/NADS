@@ -1,4 +1,32 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { onMounted, ref, watch } from "vue";
+import { useAssetStore } from "../store/asset";
+let pageForm = ref({
+  pageNumber: 1,
+  pageSize: 7,
+});
+
+let AssetMappingList = ref({});
+
+const assetStore = useAssetStore();
+
+// 获取资产测绘
+const searchAssetMappingList = async (pageForm: any) => {
+  AssetMappingList.value = await assetStore.getAssetMappingInfo(pageForm.value);
+  console.log(AssetMappingList.value.list);
+};
+
+// 监听页数变化
+watch(
+  () => pageForm.value.pageNumber,
+  (newPageNumber, oldPageNumber) => {
+    searchAssetMappingList(pageForm);
+  }
+);
+onMounted(async () => {
+  await searchAssetMappingList(pageForm);
+});
+</script>
 <!-- 资产测绘 -->
 <template>
   <!-- S 查询界面 -->
@@ -11,24 +39,44 @@
   <!-- E 查询界面 -->
   <!--S 结果页面 -->
   <div id="result">
-    <h1>ip地址</h1>
-    <div class="DetailedSearch">
+    <h2>资产查询</h2>
+    <!-- <div class="DetailedSearch">
       <el-input placeholder="请输入要搜索的资产"></el-input
       ><el-button class="el-button--add">搜索</el-button>
-    </div>
+    </div> -->
     <hr />
-
-    <el-table style="width: 100%">
-      <el-table-column label="id" width="200" />
-      <el-table-column label="ip" width="200" />
-      <el-table-column label="port" width="200" />
-      <el-table-column label="Country" width="200" />
-      <el-table-column label="province" width="200" />
-      <el-table-column label="city" />
-      <el-table-column label="updated_at" />
-    </el-table>
-    <el-pagination layout="prev, pager, next" :total="50" />
-
+    <el-descriptions
+      direction="vertical"
+      :column="7"
+      v-for="item in AssetMappingList.list"
+      border
+    >
+      <el-descriptions-item width="16%" label="ip">{{
+        item.ip
+      }}</el-descriptions-item>
+      <el-descriptions-item width="10%" label="port">{{
+        item.port
+      }}</el-descriptions-item>
+      <el-descriptions-item width="10%" label="Country">{{
+        item.country
+      }}</el-descriptions-item>
+      <el-descriptions-item width="14%" label="province">
+        {{ item.province }}
+      </el-descriptions-item>
+      <el-descriptions-item width="10%" label="city">
+        {{ item.city }}
+      </el-descriptions-item>
+      <el-descriptions-item width="16%" label="updated">
+        {{ item.updatedAt }}
+      </el-descriptions-item>
+    </el-descriptions>
+    <el-pagination
+      small
+      layout="prev, pager, next"
+      :total="AssetMappingList.total"
+      v-model:current-page="pageForm.pageNumber"
+      :page-count="AssetMappingList.pages"
+    />
     <!--E 结果页面 -->
   </div>
 </template>

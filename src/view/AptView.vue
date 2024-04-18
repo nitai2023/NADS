@@ -39,7 +39,7 @@ onMounted(async () => {
       <el-table-column prop="publisher" label="publisher" />
       <el-table-column prop="reportName" label="reportName" />
       <el-table-column prop="userId" label="userId" />
-      <el-table-column>
+      <el-table-column width="180">
         <template #header>
           <el-button size="small" type="success">添加</el-button>
         </template>

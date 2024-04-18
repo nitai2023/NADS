@@ -84,31 +84,31 @@ router.beforeEach((to, from, next) => {
 });
 
 // 检测token时效是否过期
-// router.beforeEach((to, from, next) => {
-//   // Exclude the home and login routes
-//   if (to.path !== "/" && to.path !== "/login") {
-//     // Check if the timer has already been started
-//     if (!localStorage.getItem("timerStarted")) {
-//       let dueTime = Number(localStorage.getItem("dueTime"));
-//       let timer = setInterval(() => {
-//         if (Date.now() > dueTime) {
-//           localStorage.clear();
-//           router.push("/login");
-//           ElMessage({
-//             message: "token时效已过，请重新登录",
-//             type: "error",
-//           });
-//           clearInterval(timer);
-//           localStorage.removeItem("timerStarted"); // 可选，如果你希望在用户再次登录后重启计时器
-//         }
-//       }, 1000);
+router.beforeEach((to, from, next) => {
+  // Exclude the home and login routes
+  if (to.path !== "/" && to.path !== "/login") {
+    // Check if the timer has already been started
+    if (!localStorage.getItem("timerStarted")) {
+      let dueTime = Number(localStorage.getItem("dueTime"));
+      let timer = setInterval(() => {
+        if (Date.now() > dueTime) {
+          localStorage.clear();
+          router.push("/login");
+          ElMessage({
+            message: "token时效已过，请重新登录",
+            type: "error",
+          });
+          clearInterval(timer);
+          localStorage.removeItem("timerStarted"); // 可选，如果你希望在用户再次登录后重启计时器
+        }
+      }, 1000);
 
-//       // Set the timerStarted item in localStorage so that the timer won't start again
-//       localStorage.setItem("timerStarted", "true");
-//     }
-//   }
+      // Set the timerStarted item in localStorage so that the timer won't start again
+      localStorage.setItem("timerStarted", "true");
+    }
+  }
 
-//   next();
-// });
+  next();
+});
 
 export default router;

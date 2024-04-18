@@ -61,7 +61,7 @@ export interface updateAssetForm {
   sshPort?: number;
 }
 
-export interface QianXinForm {
+export interface AssetMappingForm {
   apiKey: string;
   isWeb: string;
   page: string;

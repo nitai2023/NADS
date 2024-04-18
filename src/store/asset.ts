@@ -5,7 +5,6 @@ import {
   newAssetForm,
   newTaskForm,
   pageList,
-  scanPortForm,
   updateAssetForm,
 } from "../api/model";
 import {
@@ -13,6 +12,8 @@ import {
   addTaskAPI,
   deleteAssetAPI,
   deleteTaskAPI,
+  getAssetMappingInfoAPI,
+  getTaskInfoAPI,
   scanPortAPI,
   scanVulnAPI,
   searchAssetAPI,
@@ -21,6 +22,16 @@ import {
 } from "../api/type";
 
 export const useAssetStore = defineStore("asset", () => {
+  // 资产测绘信息
+  const getAssetMappingInfo = async (form: pageList) => {
+    try {
+      const res = await getAssetMappingInfoAPI(form);
+      return res.data.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // 资产列表查询
   const searchAsset = async (form: pageList) => {
     try {
@@ -87,23 +98,33 @@ export const useAssetStore = defineStore("asset", () => {
       console.log(error);
     }
   };
-  // 端口扫描
-  const scanPort = async (form: scanPortForm) => {
+  // 获取任务详情
+  const getTaskInfo = async (taskId: number) => {
     try {
-      const res = await scanPortAPI(form);
+      const res = await getTaskInfoAPI(taskId);
+      return res.data.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // 端口扫描
+  const scanPort = async (taskId: number) => {
+    try {
+      const res = await scanPortAPI(taskId);
     } catch (error) {
       console.log(error);
     }
   };
   // 漏洞扫描
-  const scanVuln = async (ip: string) => {
+  const scanVuln = async (taskId: number) => {
     try {
-      const res = await scanVulnAPI(ip);
+      const res = await scanVulnAPI(taskId);
     } catch (error) {
       console.log(error);
     }
   };
   return {
+    getAssetMappingInfo,
     searchAsset,
     addAsset,
     updateAsset,
@@ -112,6 +133,7 @@ export const useAssetStore = defineStore("asset", () => {
     searchTask,
     scanPort,
     deleteTask,
+    getTaskInfo,
     scanVuln,
   };
 });

@@ -36,14 +36,12 @@ request.interceptors.response.use(
           break;
         case 401:
           error.message = error.response.data.msg;
-          localStorage.removeItem("token");
-
-          router.push("/login");
-          location.reload();
-
           break;
         case 403:
           error.message = error.response.data.msg;
+          localStorage.removeItem("token");
+          router.push("/login");
+          location.reload();
           break;
         case 404:
           error.message = error.response.data.msg;
