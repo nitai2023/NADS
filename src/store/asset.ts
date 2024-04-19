@@ -72,7 +72,7 @@ export const useAssetStore = defineStore("asset", () => {
   const addTask = async (form: newTaskForm) => {
     try {
       const res = await addTaskAPI(form);
-      if (res.data.msg == null)
+      if (res.data.msg == "OK")
         setTimeout(() => {
           ElMessage({
             type: "success",
