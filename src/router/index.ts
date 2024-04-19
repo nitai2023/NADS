@@ -57,6 +57,7 @@ const routes: Array<RouteRecordRaw> = [
     ],
   },
   {
+    // 不存在页面
     path: "/:pathMatch(.*)*",
     component: NotFoundViewVue,
   },
@@ -67,6 +68,7 @@ const router = createRouter({
   routes,
 });
 
+// 路由守位
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem("token");
   if (

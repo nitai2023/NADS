@@ -1,43 +1,24 @@
 <script lang="ts" setup>
-import { onMounted, ref, watch } from "vue";
+import { ref } from "vue";
 import { useAssetStore } from "../../store/asset";
 
 const assetStore = useAssetStore();
 let scanType = ref("vulnscan");
 let taskId = ref(2);
+let taskInfo = ref({});
+let taskVisible = ref(false);
 
 // 任务详情
 const getTaskInfo = async () => {
-  await assetStore.getTaskInfo(taskId.value);
+  taskInfo.value = await assetStore.getTaskInfo(taskId.value);
+  // console.log(taskInfo.value);
+
+  taskVisible.value = true;
 };
 
 const doScan = async (type: string) => {
   if (type == "vulnscan") await assetStore.scanVuln(taskId.value);
   else await assetStore.scanPort(taskId.value);
-  // var data = JSON.stringify({});
-
-  // var config = {
-  //   method: "post",
-  //   url: "http://8.130.92.122:8080/property/portScan?taskId=2",
-  //   headers: {
-  //     token:
-  //       "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MTM0NjEwNjMsInVzZXJuYW1lIjoiYWRtaW4ifQ.sdo4eu0QI0cWazpsEtYYTzrySUHmWsOTtWoC93mIHtw",
-  //     "User-Agent": "Apifox/1.0.0 (https://apifox.com)",
-  //     "Content-Type": "application/json",
-  //     Accept: "*/*",
-  //     Host: "8.130.92.122:8080",
-  //     Connection: "keep-alive",
-  //   },
-  //   data: data,
-  // };
-
-  // axios(config)
-  //   .then(function (response) {
-  //     console.log(JSON.stringify(response.data));
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   });
 };
 </script>
 <!-- 目标详情 -->
@@ -54,21 +35,27 @@ const doScan = async (type: string) => {
     >
     <el-button size="small" type="success" @click="getTaskInfo">详情</el-button>
   </div>
-  <el-collapse>
+  <el-collapse v-if="taskVisible">
     <el-collapse-item name="1">
       <template #title>
-        <h2>ip地址</h2>
-        <el-badge is-dot class="item" color="green"></el-badge>
-        <h3>有响应</h3>
-        <P>探测时间：</P>
+        <h3>ip地址:{{ taskInfo.startIp }}~{{ taskInfo.endIp }}</h3>
       </template>
       <template #default>
+        <P>任务创建人：{{ taskInfo.createBy }}</P>
+        <P>创建时间：{{ taskInfo.createTime }}</P>
+        <P>探测时间：{{ taskInfo.startTime }}~{{ taskInfo.endTime }}</P>
+        <el-text class="mx-1" type="success"
+          >状态：{{ taskInfo.status }}</el-text
+        >
+        <br />
+        <el-text class="mx-1" type="primary">状态：{{ taskInfo.type }}</el-text>
         <h2>端口信息</h2>
         <hr />
-        <h3>Banner</h3>
-        <p>
-          Consistent within interface: all elements should be consistent, such
-          as: design style, icons and texts, position of elements, etc.
+        <p v-for="item in taskInfo.portDetailList">
+          主机：{{ item.host }} 端口：{{ item.port }} 协议：{{
+            item.protocol
+          }}
+          状态：{{ item.status }}
         </p></template
       >
     </el-collapse-item>

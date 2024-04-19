@@ -8,9 +8,6 @@
       <RouterLink to="/login"
         ><button class="action-button">登录</button></RouterLink
       >
-      <RouterLink to="/register"
-        ><button class="action-button">注册</button></RouterLink
-      >
     </main>
   </div>
 </template>

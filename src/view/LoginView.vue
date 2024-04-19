@@ -136,7 +136,13 @@ const forgetPassword = async (forgetPawwsordForm: forgetPawwsordForm) => {
       </el-form>
     </div>
   </div>
-  <el-dialog v-model="seakPasswordVisible" title="找回密码" width="500">
+  <!-- S Component 找回密码 -->
+  <el-dialog
+    v-model="seakPasswordVisible"
+    title="找回密码"
+    width="500"
+    style="background-image: linear-gradient(to right, #434343 0%, black 100%)"
+  >
     <div>
       <el-form
         label-position="top"
@@ -173,6 +179,7 @@ const forgetPassword = async (forgetPawwsordForm: forgetPawwsordForm) => {
       </el-form>
     </div>
   </el-dialog>
+  <!-- E Component 找回密码 -->
 </template>
 
 <style scoped lang="scss">
