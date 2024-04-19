@@ -4,7 +4,7 @@ import { useAdminStore } from "../store/admin";
 
 let pageForm = ref({
   pageNumber: 1,
-  pageSize: 10,
+  pageSize: 4,
 });
 const aptListInfo = ref({});
 
@@ -29,9 +29,15 @@ onMounted(async () => {
 </script>
 <template>
   <h3>APT任务管理</h3>
-  <div>
-    <el-table row-key="date" :data="aptListInfo.list" style="width: 100%">
-      <el-table-column prop="id" label="id" width="80" />
+  <div class="table">
+    <el-table
+      row-key="date"
+      :data="aptListInfo.list"
+      style="width: 100%"
+      border
+      height="600"
+    >
+      <el-table-column prop="id" label="id" width="80" fixed />
       <el-table-column prop="foundTime" label="foundTime" width="180" />
       <el-table-column prop="localReport" label="localReport" width="180" />
       <el-table-column prop="organization" label="organization" width="180" />
@@ -63,7 +69,7 @@ onMounted(async () => {
       </el-table-column>
     </el-table>
     <el-pagination
-      small
+      large
       layout="prev, pager, next"
       :total="aptListInfo.total"
       v-model:current-page="pageForm.pageNumber"
@@ -71,4 +77,19 @@ onMounted(async () => {
     />
   </div>
 </template>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+h3 {
+  height: 25px;
+  margin: 20px;
+}
+.table {
+  width: 100%;
+  height: calc(100% - 65px);
+  margin: 0;
+  padding: 0;
+  .el-pagination {
+    display: flex;
+    justify-content: center;
+  }
+}
+</style>

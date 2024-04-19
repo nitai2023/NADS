@@ -5,9 +5,11 @@ import Menu from "../../components/Menu.vue";
 <template>
   <div class="dashboard-view">
     <!-- S Comment Menu -->
+
     <aside>
       <Menu></Menu>
     </aside>
+
     <main>
       <RouterView></RouterView>
     </main>
@@ -19,7 +21,6 @@ import Menu from "../../components/Menu.vue";
 .dashboard-view {
   display: flex;
   height: 100vh;
-
   aside {
     height: 100%;
 
@@ -27,7 +28,6 @@ import Menu from "../../components/Menu.vue";
       height: 100%;
     }
   }
-
   main {
     width: 100%;
     div {

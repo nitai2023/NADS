@@ -5,7 +5,16 @@ import { useAssetStore } from "../../store/asset";
 const assetStore = useAssetStore();
 const addVisible = ref(false);
 const viewChangeVisible = ref(false);
-
+let getType = (itemStatue: String) => {
+  switch (itemStatue) {
+    case "stopped":
+      return "danger";
+    case "pending":
+      return "primary";
+    case "finished":
+      return "success";
+  }
+};
 let newTask = ref({
   name: null,
   startIp: null,
@@ -223,7 +232,9 @@ onMounted(async () => {
                 status
               </div>
             </template>
-            <el-tag size="small"> {{ item.status }}</el-tag>
+            <el-tag size="small" :type="getType(item.status)">
+              {{ item.status }}</el-tag
+            >
           </el-descriptions-item>
         </el-descriptions>
       </div>

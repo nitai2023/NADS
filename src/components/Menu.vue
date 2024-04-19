@@ -36,7 +36,7 @@ const logout = async () => {
     >
       <el-sub-menu index="1">
         <template #title>
-          <el-icon><location /></el-icon>
+          <el-icon><Aim /></el-icon>
           <span>定向资产</span>
         </template>
         <el-menu-item index="1-1" route="/dashboard/targetedasset/nodemanage">
@@ -52,7 +52,7 @@ const logout = async () => {
         </el-menu-item>
       </el-sub-menu>
       <el-menu-item index="2" route="/dashboard/assetmap">
-        <el-icon><Search /></el-icon>
+        <el-icon><Money /></el-icon>
         <template #title>资产查询</template>
       </el-menu-item>
       <el-menu-item index="3" route="/dashboard/vulnerability">
@@ -64,7 +64,9 @@ const logout = async () => {
         <template #title>用户管理</template>
       </el-menu-item>
       <el-menu-item index="5" route="/dashboard/aptmanagement">
-        <el-icon><setting /></el-icon>
+        <el-icon>
+          <lock />
+        </el-icon>
         <template #title>APT管理</template>
       </el-menu-item>
     </el-menu>
