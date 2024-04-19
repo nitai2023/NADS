@@ -5,7 +5,7 @@ import router from "../router";
 
 const request = axios.create({
   baseURL: apiConfig.directUrl,
-  timeout: 5000,
+  timeout: 6000000,
 });
 
 // 添加请求拦截器

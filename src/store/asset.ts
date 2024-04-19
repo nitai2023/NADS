@@ -44,6 +44,8 @@ export const useAssetStore = defineStore("asset", () => {
   // 添加资产
   const addAsset = async (form: newAssetForm) => {
     try {
+      console.log(form);
+
       await addAssetAPI(form);
     } catch (error) {
       console.log(error);

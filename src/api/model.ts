@@ -48,8 +48,8 @@ export interface newAssetForm {
   accountName: string;
   ip: string;
   nodeName: string;
-  sshKey: number;
-  sshPort: number;
+  sshKey: string;
+  sshPort: string;
 }
 
 export interface updateAssetForm {

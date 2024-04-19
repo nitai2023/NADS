@@ -2,6 +2,7 @@
 import { onMounted, ref } from "vue";
 import { useAssetStore } from "../../store/asset";
 import { newNodeForm, updateAssetForm } from "../api/model";
+import { newAssetForm } from "../../api/model";
 
 const assetStore = useAssetStore();
 
@@ -9,20 +10,20 @@ let addVisible = ref(false);
 let updateVisible = ref(false);
 
 let assetList = ref({});
-let newNode = ref({
+let newNode = ref<newAssetForm>({
   accountName: "",
   ip: "",
   nodeName: "",
-  sshKey: 0,
-  sshPort: 0,
+  sshKey: "",
+  sshPort: "",
 });
 let NodeInfo = ref({
   id: 0,
   accountName: "",
   ip: "",
   nodeName: "",
-  sshKey: 0,
-  sshPort: 0,
+  sshKey: "",
+  sshPort: "",
 });
 
 let pageForm = ref({
@@ -38,7 +39,7 @@ const searchAssetList = async (pageForm: any) => {
 
 // 添加节点
 const addNode = async (newNode: newNodeForm) => {
-  await assetStore.addAsset(newNode.value);
+  await assetStore.addAsset(newNode);
   location.reload();
 };
 // 删除节点
