@@ -45,29 +45,6 @@ onMounted(async () => {
       <el-table-column prop="reportName" label="reportName" />
       <el-table-column prop="time" label="time" />
       <el-table-column prop="updateTime" label="updateTime" />
-
-      <el-table-column width="150">
-        <template #header>
-          <el-button size="small" type="success">添加</el-button>
-        </template>
-
-        <template #default="scope">
-          <el-button size="small" type="primary">修改</el-button>
-          <el-popconfirm
-            width="220"
-            confirm-button-text="OK"
-            cancel-button-text="No, Thanks"
-            :icon="InfoFilled"
-            icon-color="#626AEF"
-            title="Are you sure to delete this?"
-            @confirm="() => {}"
-          >
-            <template #reference>
-              <el-button size="small" type="danger">删除</el-button>
-            </template>
-          </el-popconfirm>
-        </template>
-      </el-table-column>
     </el-table>
     <el-pagination
       large

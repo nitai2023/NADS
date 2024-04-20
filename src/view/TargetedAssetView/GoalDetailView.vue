@@ -1,6 +1,8 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ElMessage } from "element-plus";
 import { useAssetStore } from "../../store/asset";
+import { ref } from "vue";
+import { ElLoading } from "element-plus";
 
 const assetStore = useAssetStore();
 let scanType = ref("vulnscan");
@@ -10,14 +12,52 @@ let taskVisible = ref(false);
 
 // 任务详情
 const getTaskInfo = async () => {
-  taskInfo.value = await assetStore.getTaskInfo(taskId.value);
-  // console.log(taskInfo.value);
-  taskVisible.value = true;
+  if (Number(taskId.value)) {
+    {
+      taskInfo.value = await assetStore.getTaskInfo(Number(taskId.value));
+      // console.log(taskInfo.value);
+      taskVisible.value = true;
+    }
+  } else {
+    ElMessage({
+      type: "info",
+      message: "请正确输入任务序列号",
+    });
+  }
 };
 
 const doScan = async (type: string) => {
-  if (type == "vulnscan") await assetStore.scanVuln(taskId.value);
-  else await assetStore.scanPort(taskId.value);
+  if (Number(taskId.value)) {
+    const loading = ElLoading.service({
+      lock: true,
+      text: "任务执行中...",
+      background: "rgba(0, 0, 0, 0.7)",
+    });
+
+    if (type == "vulnscan") {
+      const res = await assetStore.scanVuln(Number(taskId.value));
+      let timer = setInterval(() => {
+        if (res) {
+          loading.close();
+          clearInterval(timer);
+        }
+      }, 1000);
+    } else {
+      const res = await assetStore.scanPort(taskId.value);
+      let timer = setInterval(() => {
+        if (res) {
+          loading.close();
+          clearInterval(timer);
+        }
+      }, 1000);
+    }
+    getTaskInfo();
+  } else {
+    ElMessage({
+      type: "info",
+      message: "请正确输入任务序列号",
+    });
+  }
 };
 </script>
 <!-- 目标详情 -->
@@ -38,7 +78,7 @@ const doScan = async (type: string) => {
       >详情</el-button
     >
   </div>
-  <el-collapse v-if="taskVisible && scanType == 'portscan'">
+  <el-collapse v-if="taskVisible && taskInfo.type == 'portscan'">
     <el-collapse-item name="1">
       <template #title>
         <h3>ip地址:{{ taskInfo.startIp }}~{{ taskInfo.endIp }}</h3>
@@ -63,7 +103,7 @@ const doScan = async (type: string) => {
       >
     </el-collapse-item>
   </el-collapse>
-  <el-collapse v-if="taskVisible && scanType == 'vulnscan'">
+  <el-collapse v-if="taskVisible && taskInfo.type == 'vulnscan'">
     <el-collapse-item name="1">
       <template #title>
         <h3>任务:{{ taskInfo.name }}</h3>
@@ -79,16 +119,13 @@ const doScan = async (type: string) => {
         <el-text class="mx-1" type="primary">类型：{{ taskInfo.type }}</el-text>
         <h2>漏洞信息：</h2>
         <hr />
-        <p
-          v-for="item in taskInfo.vulnerabilityDetailList"
-          v-if="taskInfo.vulnerabilityDetailList.length !== 0"
-        >
+        <p v-for="item in taskInfo.vulnerabilityDetailList">
           主机：{{ item.host }} 端口：{{ item.port }} 协议：{{
             item.protocol
           }}
           状态：{{ item.status }}
         </p>
-        <p v-else>未检测出漏洞</p>
+        <p v-if="taskInfo.vulnerabilityDetailList.length == 0">未检测出漏洞</p>
       </template>
     </el-collapse-item>
   </el-collapse>

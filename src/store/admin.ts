@@ -1,4 +1,6 @@
+import { ElMessage } from "element-plus";
 import { defineStore } from "pinia";
+
 import {
   newUserForm,
   pageList,
@@ -17,7 +19,13 @@ export const useAdminStore = defineStore("admin", () => {
   // 更新用户密码
   const updatePassword = async (form: updatePawwsordForm) => {
     try {
-      updatePasswordAPI(form);
+      await updatePasswordAPI(form);
+      setTimeout(() => {
+        ElMessage({
+          type: "success",
+          message: "用户密码更新成功",
+        });
+      }, 500);
     } catch (error) {
       console.log(error);
     }
@@ -26,7 +34,12 @@ export const useAdminStore = defineStore("admin", () => {
   const updateUserInfo = async (form: updateUserInfoForm) => {
     try {
       await updateUserInfoAPI(form);
-      
+      setTimeout(() => {
+        ElMessage({
+          type: "success",
+          message: "用户信息更新成功",
+        });
+      }, 500);
     } catch (error) {
       console.log(error);
     }
@@ -35,7 +48,12 @@ export const useAdminStore = defineStore("admin", () => {
   const addUser = async (form: newUserForm) => {
     try {
       await addUserAPI(form);
-
+      setTimeout(() => {
+        ElMessage({
+          type: "success",
+          message: "新用户添加成功",
+        });
+      }, 500);
     } catch (error) {
       console.log(error);
     }
@@ -44,6 +62,12 @@ export const useAdminStore = defineStore("admin", () => {
   const deleteUserd = async (id: number) => {
     try {
       await deleteUserdAPI(id);
+      setTimeout(() => {
+        ElMessage({
+          type: "success",
+          message: "用户已删除",
+        });
+      }, 500);
     } catch (error) {
       console.log(error);
     }

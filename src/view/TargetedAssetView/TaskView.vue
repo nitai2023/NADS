@@ -30,12 +30,12 @@ let TaskListInfo = ref({});
 
 const addTask = async (taskInfo: newTaskForm) => {
   await assetStore.addTask(taskInfo);
+  await searchTaskList(pageForm);
   addVisible.value = false;
 };
 // 获取任务列表
 const searchTaskList = async (pageForm: any) => {
   TaskListInfo.value = await assetStore.searchTask(pageForm.value);
-  console.log(TaskListInfo.value);
 };
 
 // 任务详情
@@ -53,7 +53,7 @@ watch(
 // 删除任务
 const deleteTask = async (taskId: number) => {
   await assetStore.deleteTask(taskId);
-  location.reload();
+  await searchTaskList(pageForm);
 };
 
 onMounted(async () => {
@@ -134,7 +134,7 @@ onMounted(async () => {
       <div v-for="item in TaskListInfo.list" class="task" size="small">
         <el-descriptions
           class="margin-top"
-          title="Task Info"
+          :title="item.type == 'portscan' ? '端口扫描' : '漏洞扫描'"
           column="4"
           size="small"
           border
@@ -159,81 +159,46 @@ onMounted(async () => {
 
           <el-descriptions-item>
             <template #label>
-              <div class="cell-item">
-                <el-icon :style="iconStyle">
-                  <user />
-                </el-icon>
-                id:
-              </div>
+              <div class="cell-item">id</div>
             </template>
             {{ item.id }}
           </el-descriptions-item>
           <el-descriptions-item>
             <template #label>
-              <div class="cell-item">
-                <el-icon :style="iconStyle">
-                  <iphone />
-                </el-icon>
-                name
-              </div>
+              <div class="cell-item">name</div>
             </template>
             {{ item.name }}
           </el-descriptions-item>
-          <el-descriptions-item>
+          <el-descriptions-item v-if="item.startIp">
             <template #label>
-              <div class="cell-item">
-                <el-icon :style="iconStyle">
-                  <location />
-                </el-icon>
-                startIp
-              </div>
+              <div class="cell-item">startIp</div>
             </template>
             {{ item.startIp }}
           </el-descriptions-item>
-          <el-descriptions-item>
+          <el-descriptions-item v-if="item.endIp">
             <template #label>
-              <div class="cell-item">
-                <el-icon :style="iconStyle">
-                  <tickets />
-                </el-icon>
-                endIp
-              </div>
+              <div class="cell-item">endIp</div>
             </template>
             {{ item.endIp }}
           </el-descriptions-item>
-          <el-descriptions-item>
+          <el-descriptions-item v-if="item.startPort">
             <template #label>
-              <div class="cell-item">
-                <el-icon :style="iconStyle">
-                  <location />
-                </el-icon>
-                startPort
-              </div>
+              <div class="cell-item">startPort</div>
             </template>
             {{ item.startPort }}
           </el-descriptions-item>
-          <el-descriptions-item>
+          <el-descriptions-item v-if="item.endPort">
             <template #label>
-              <div class="cell-item">
-                <el-icon :style="iconStyle">
-                  <tickets />
-                </el-icon>
-                endPort
-              </div>
+              <div class="cell-item">endPort</div>
             </template>
             {{ item.endPort }}
           </el-descriptions-item>
           <el-descriptions-item>
             <template #label>
-              <div class="cell-item">
-                <el-icon :style="iconStyle">
-                  <office-building />
-                </el-icon>
-                status
-              </div>
+              <div class="cell-item">status</div>
             </template>
-            <el-tag size="small" :type="getType(item.status)">
-              {{ item.status }}</el-tag
+            <el-text size="small" :type="getType(item.status)">
+              {{ item.status }}</el-text
             >
           </el-descriptions-item>
         </el-descriptions>

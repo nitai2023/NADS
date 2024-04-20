@@ -32,7 +32,7 @@ export const useUserStore = defineStore("user", () => {
       const res = (await userLoginAPI(form)).data;
       if (res.data && res.msg == "OK") {
         localStorage.setItem("token", res.data.token);
-        const dueTime = (Date.now() + 3 * 60 * 60 * 1000).toString();
+        const dueTime = (Date.now() + 30 * 60 * 1000).toString();
         localStorage.setItem("dueTime", dueTime);
 
         router.push("/dashboard");

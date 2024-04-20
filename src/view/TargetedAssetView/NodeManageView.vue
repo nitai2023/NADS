@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
+import { newAssetForm } from "../../api/model";
 import { useAssetStore } from "../../store/asset";
 import { newNodeForm, updateAssetForm } from "../api/model";
-import { newAssetForm } from "../../api/model";
 
 const assetStore = useAssetStore();
 
@@ -40,12 +40,13 @@ const searchAssetList = async (pageForm: any) => {
 // 添加节点
 const addNode = async (newNode: newNodeForm) => {
   await assetStore.addAsset(newNode);
-  location.reload();
+  await searchAssetList(pageForm.value);
+  addVisible.value = false;
 };
 // 删除节点
 const deleteNode = async (id: number) => {
   await assetStore.deleteAsset(id);
-  location.reload();
+  await searchAssetList(pageForm.value);
 };
 
 // 获取节点信息
@@ -63,7 +64,8 @@ const getNodeInfo = (row) => {
 // 修改节点信息
 const updateNodeInfo = async (NodeInfo: updateAssetForm) => {
   await assetStore.updateAsset(NodeInfo);
-  location.reload();
+  await searchAssetList(pageForm.value);
+  updateVisible.value = false;
 };
 
 onMounted(async () => {

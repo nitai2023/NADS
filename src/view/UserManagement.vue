@@ -44,12 +44,13 @@ watch(
 // 添加用户
 const addUser = async (UserInfo: newUserForm) => {
   await adminStore.addUser(UserInfo);
-  location.reload();
+  await searchUserListd(pageForm.value);
+  addVisible.value = false;
 };
 // 删除用户
 const deleteUser = async (id: number) => {
   await adminStore.deleteUserd(id);
-  location.reload();
+  await searchUserListd(pageForm.value);
 };
 
 // 获取用户信息
@@ -65,7 +66,8 @@ const getUserInfo = (row) => {
 // 修改用户信息
 const updateUserInfo = async (UserInfo: updateUserInfoForm) => {
   await adminStore.updateUserInfo(UserInfo);
-  location.reload();
+  await searchUserListd(pageForm.value);
+  updateVisible.value = false;
 };
 
 onMounted(async () => {

@@ -12,7 +12,10 @@ const pinia = createPinia();
 const app = createApp({
   render: () => h(App),
 });
-
+// // 清楚本地存储
+// window.onunload = function () {
+//   localStorage.clear();
+// };
 app.use(router).use(pinia).use(ElementPlus).mount("#app");
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {

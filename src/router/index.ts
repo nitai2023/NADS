@@ -1,4 +1,6 @@
+import { ElMessage } from "element-plus";
 import { RouteRecordRaw, createRouter, createWebHashHistory } from "vue-router";
+
 import AptView from "../view/AptView.vue";
 import AssetMapView from "../view/AssetMapView.vue";
 import HomeView from "../view/HomeView.vue";

@@ -44,9 +44,13 @@ export const useAssetStore = defineStore("asset", () => {
   // 添加资产
   const addAsset = async (form: newAssetForm) => {
     try {
-      console.log(form);
-
       await addAssetAPI(form);
+      setTimeout(() => {
+        ElMessage({
+          type: "success",
+          message: "资产添加成功",
+        });
+      }, 500);
     } catch (error) {
       console.log(error);
     }
@@ -55,6 +59,12 @@ export const useAssetStore = defineStore("asset", () => {
   const updateAsset = async (form: updateAssetForm) => {
     try {
       await updateAssetAPI(form);
+      setTimeout(() => {
+        ElMessage({
+          type: "success",
+          message: "资产更新成功",
+        });
+      }, 500);
     } catch (error) {
       console.log(error);
     }
@@ -63,6 +73,12 @@ export const useAssetStore = defineStore("asset", () => {
   const deleteAsset = async (nodeId: number) => {
     try {
       const res = await deleteAssetAPI(nodeId);
+      setTimeout(() => {
+        ElMessage({
+          type: "success",
+          message: "资产删除成功",
+        });
+      }, 500);
       return res.data.data;
     } catch (error) {
       console.log(error);
@@ -96,6 +112,12 @@ export const useAssetStore = defineStore("asset", () => {
   const deleteTask = async (taskId: number) => {
     try {
       const res = await deleteTaskAPI(taskId);
+      setTimeout(() => {
+        ElMessage({
+          type: "success",
+          message: "任务删除成功",
+        });
+      }, 500);
     } catch (error) {
       console.log(error);
     }
@@ -104,7 +126,12 @@ export const useAssetStore = defineStore("asset", () => {
   const getTaskInfo = async (taskId: number) => {
     try {
       const res = await getTaskInfoAPI(taskId);
-
+      setTimeout(() => {
+        ElMessage({
+          type: "success",
+          message: "获取任务详情",
+        });
+      }, 500);
       return res.data.data;
     } catch (error) {
       console.log(error);
@@ -114,7 +141,6 @@ export const useAssetStore = defineStore("asset", () => {
   const scanPort = async (taskId: number) => {
     try {
       const res = await scanPortAPI(taskId);
-
       return "success";
     } catch (error) {
       console.log(error);
@@ -125,7 +151,6 @@ export const useAssetStore = defineStore("asset", () => {
   const scanVuln = async (taskId: number) => {
     try {
       await scanVulnAPI(taskId);
-
       return "success";
     } catch (error) {
       console.log(error);
