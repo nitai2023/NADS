@@ -13,7 +13,6 @@ import {
   updatePasswordAPI,
   updateUserInfoAPI,
 } from "../api/type";
-
 export const useAdminStore = defineStore("admin", () => {
   // 更新用户密码
   const updatePassword = async (form: updatePawwsordForm) => {
@@ -27,6 +26,7 @@ export const useAdminStore = defineStore("admin", () => {
   const updateUserInfo = async (form: updateUserInfoForm) => {
     try {
       await updateUserInfoAPI(form);
+      
     } catch (error) {
       console.log(error);
     }
@@ -35,6 +35,7 @@ export const useAdminStore = defineStore("admin", () => {
   const addUser = async (form: newUserForm) => {
     try {
       await addUserAPI(form);
+
     } catch (error) {
       console.log(error);
     }
