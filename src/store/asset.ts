@@ -104,6 +104,7 @@ export const useAssetStore = defineStore("asset", () => {
   const getTaskInfo = async (taskId: number) => {
     try {
       const res = await getTaskInfoAPI(taskId);
+
       return res.data.data;
     } catch (error) {
       console.log(error);
@@ -113,16 +114,22 @@ export const useAssetStore = defineStore("asset", () => {
   const scanPort = async (taskId: number) => {
     try {
       const res = await scanPortAPI(taskId);
+
+      return "success";
     } catch (error) {
       console.log(error);
+      return "error";
     }
   };
   // 漏洞扫描
   const scanVuln = async (taskId: number) => {
     try {
-      const res = await scanVulnAPI(taskId);
+      await scanVulnAPI(taskId);
+
+      return "success";
     } catch (error) {
       console.log(error);
+      return "error";
     }
   };
   return {

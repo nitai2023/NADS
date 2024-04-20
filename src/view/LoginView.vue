@@ -30,6 +30,8 @@ const getCaptcha = (username: string) => {
     });
   } else {
     userStore.getCaptcha(username).then((response) => {
+      console.log(111, response.data);
+      // 创建一个Blob对象，用于存储图片数据
       let blob = response.data;
       let imgUrl = window.URL.createObjectURL(blob);
       // 更新captchaImg的值

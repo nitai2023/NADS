@@ -31,7 +31,7 @@ const adminStore = useAdminStore();
 
 // 获取用户列表
 const searchUserListd = async (pageForm: any) => {
-  userListInfo.value = await adminStore.searchUserListd(pageForm.value);
+  userListInfo.value = await adminStore.searchUserListd(pageForm);
   console.log(userListInfo.value);
 };
 // 监听页数变化
@@ -69,7 +69,7 @@ const updateUserInfo = async (UserInfo: updateUserInfoForm) => {
 };
 
 onMounted(async () => {
-  await searchUserListd(pageForm);
+  await searchUserListd(pageForm.value);
 });
 </script>
 <!-- UserManangement -->
@@ -118,7 +118,7 @@ onMounted(async () => {
       v-model:current-page="pageForm.pageNumber"
       :page-count="userListInfo.pages"
     />
-    <!-- S Component 添加任务 -->
+    <!-- S Component 添加用户 -->
     <el-dialog v-model="addVisible" title="添加用户" width="500">
       <div id="border">
         <el-form
@@ -166,9 +166,9 @@ onMounted(async () => {
         </el-form>
       </div>
     </el-dialog>
-    <!-- E Component 添加任务 -->
+    <!-- E Component 添加用户 -->
 
-    <!-- S Component 修改任务 -->
+    <!-- S Component 修改用户 -->
     <el-dialog v-model="updateVisible" title="修改用户信息" width="500">
       <div id="border">
         <el-form
@@ -211,7 +211,7 @@ onMounted(async () => {
         </el-form>
       </div>
     </el-dialog>
-    <!-- E Component 修改资产 -->
+    <!-- E Component 修改用户 -->
   </div>
 </template>
 <style scoped lang="scss">

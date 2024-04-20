@@ -12,7 +12,6 @@ let taskVisible = ref(false);
 const getTaskInfo = async () => {
   taskInfo.value = await assetStore.getTaskInfo(taskId.value);
   // console.log(taskInfo.value);
-
   taskVisible.value = true;
 };
 
@@ -39,7 +38,7 @@ const doScan = async (type: string) => {
       >详情</el-button
     >
   </div>
-  <el-collapse v-if="taskVisible">
+  <el-collapse v-if="taskVisible && scanType == 'portscan'">
     <el-collapse-item name="1">
       <template #title>
         <h3>ip地址:{{ taskInfo.startIp }}~{{ taskInfo.endIp }}</h3>
@@ -62,6 +61,35 @@ const doScan = async (type: string) => {
           状态：{{ item.status }}
         </p></template
       >
+    </el-collapse-item>
+  </el-collapse>
+  <el-collapse v-if="taskVisible && scanType == 'vulnscan'">
+    <el-collapse-item name="1">
+      <template #title>
+        <h3>任务:{{ taskInfo.name }}</h3>
+      </template>
+      <template #default>
+        <P>任务创建人：{{ taskInfo.createBy }}</P>
+        <P>创建时间：{{ taskInfo.createTime }}</P>
+        <P>探测时间：{{ taskInfo.startTime }}~{{ taskInfo.endTime }}</P>
+        <el-text class="mx-1" type="success"
+          >状态：{{ taskInfo.status }}</el-text
+        >
+        <br />
+        <el-text class="mx-1" type="primary">类型：{{ taskInfo.type }}</el-text>
+        <h2>漏洞信息：</h2>
+        <hr />
+        <p
+          v-for="item in taskInfo.vulnerabilityDetailList"
+          v-if="taskInfo.vulnerabilityDetailList.length !== 0"
+        >
+          主机：{{ item.host }} 端口：{{ item.port }} 协议：{{
+            item.protocol
+          }}
+          状态：{{ item.status }}
+        </p>
+        <p v-else>未检测出漏洞</p>
+      </template>
     </el-collapse-item>
   </el-collapse>
 </template>

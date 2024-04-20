@@ -38,14 +38,15 @@ onMounted(async () => {
       height="600"
     >
       <el-table-column prop="id" label="id" width="80" fixed />
-      <el-table-column prop="foundTime" label="foundTime" width="180" />
       <el-table-column prop="localReport" label="localReport" width="180" />
-      <el-table-column prop="organization" label="organization" width="180" />
+      <el-table-column prop="manufacturer" label="manufacturer" width="80" />
+      <el-table-column prop="organize" label="organize" width="80" />
       <el-table-column prop="outerLink" label="outerLink" />
-      <el-table-column prop="publisher" label="publisher" />
       <el-table-column prop="reportName" label="reportName" />
-      <el-table-column prop="userId" label="userId" />
-      <el-table-column width="180">
+      <el-table-column prop="time" label="time" />
+      <el-table-column prop="updateTime" label="updateTime" />
+
+      <el-table-column width="150">
         <template #header>
           <el-button size="small" type="success">添加</el-button>
         </template>
