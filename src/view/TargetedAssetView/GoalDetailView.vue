@@ -29,11 +29,15 @@ const doScan = async (type: string) => {
       <el-radio-button label="漏洞扫描" value="vulnscan" />
       <el-radio-button label="端口扫描" value="portscan" />
     </el-radio-group>
-    <el-input placeholder="请输入要执行的任务id" v-model="taskId"></el-input
-    ><el-button class="el-button--add" @click="doScan(scanType)"
-      >执行</el-button
+    <div>
+      <el-input placeholder="请输入要执行的任务id" v-model="taskId"></el-input
+      ><el-button class="el-button--add" @click="doScan(scanType)"
+        >执行</el-button
+      >
+    </div>
+    <el-button size="small" class="el-button--add" @click="getTaskInfo"
+      >详情</el-button
     >
-    <el-button size="small" type="success" @click="getTaskInfo">详情</el-button>
   </div>
   <el-collapse v-if="taskVisible">
     <el-collapse-item name="1">
@@ -93,12 +97,18 @@ h1 {
   }
 }
 .DetailedSearch {
-  display: inline-block;
-  margin-left: 1%;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  > * {
+    margin-right: 40px;
+  }
   .el-input {
     width: 200px;
   }
   .el-button--add {
+    width: 60px;
+    height: 32px;
     background-color: rgb(0, 203, 135);
     color: black;
   }
